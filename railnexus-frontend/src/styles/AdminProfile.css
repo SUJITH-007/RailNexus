@@ -1,0 +1,258 @@
+.admin-profile-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.admin-profile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-profile-identity {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.admin-profile-avatar {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.admin-profile-identity h2 {
+    margin: 0;
+    color: #111827;
+    font-size: 22px;
+}
+
+.admin-profile-identity p {
+    margin: 5px 0 10px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.admin-profile-status {
+    display: inline-block;
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    background: #dcfce7;
+    color: #15803d;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.admin-profile-edit-button {
+    padding: 11px 18px;
+
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+
+    background: white;
+    color: #2563eb;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.admin-profile-edit-button:hover {
+    background: #eff6ff;
+}
+
+.admin-profile-details,
+.admin-profile-edit-form {
+    padding: 30px;
+}
+
+.admin-profile-section-label {
+    margin: 0 0 8px;
+
+    color: #2563eb;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.admin-profile-section h3 {
+    margin: 0;
+
+    color: #111827;
+    font-size: 21px;
+}
+
+.admin-profile-section-description {
+    margin: 8px 0 25px;
+
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.admin-profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.admin-profile-field label,
+.admin-profile-input-group label {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #374151;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-profile-value {
+    padding: 13px 14px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    background: #f9fafb;
+    color: #374151;
+
+    font-size: 14px;
+}
+
+.admin-account-info {
+    margin-top: 35px;
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.admin-account-row {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    font-size: 14px;
+}
+
+.admin-account-row span {
+    color: #6b7280;
+}
+
+.admin-account-row strong {
+    color: #111827;
+}
+
+.admin-profile-input-group input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    background: white;
+
+    color: #111827;
+    font-size: 14px;
+
+    outline: none;
+}
+
+.admin-profile-input-group input:focus {
+    border-color: #2563eb;
+}
+
+.admin-profile-input-group input:disabled {
+    background: #f3f4f6;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.admin-profile-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    margin-top: 30px;
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.admin-profile-cancel-button,
+.admin-profile-save-button {
+    padding: 11px 18px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.admin-profile-cancel-button {
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #374151;
+}
+
+.admin-profile-cancel-button:hover {
+    background: #f9fafb;
+}
+
+.admin-profile-save-button {
+    border: 1px solid #2563eb;
+    background: #2563eb;
+    color: white;
+}
+
+.admin-profile-save-button:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 700px) {
+
+    .admin-profile-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .admin-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-profile-form-actions {
+        flex-direction: column;
+    }
+
+    .admin-profile-cancel-button,
+    .admin-profile-save-button {
+        width: 100%;
+    }
+}

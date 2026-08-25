@@ -1,0 +1,420 @@
+.confirmation-page {
+    min-height: 100vh;
+    background: #f5f7fa;
+}
+
+.confirmation-header {
+    background: #0f172a;
+    color: white;
+    padding: 75px 40px 95px;
+}
+
+.confirmation-header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.confirmation-tagline {
+    color: #93c5fd;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.confirmation-header h1 {
+    font-size: 42px;
+    margin-bottom: 14px;
+}
+
+.confirmation-header-content > p {
+    color: #cbd5e1;
+    font-size: 17px;
+}
+
+.confirmation-content {
+    max-width: 1100px;
+    margin: -55px auto 0;
+    padding: 0 40px 90px;
+    position: relative;
+}
+
+.confirmation-success-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-success-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.confirmation-success-label {
+    color: #16a34a;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 7px;
+}
+
+.confirmation-success-card h2 {
+    color: #111827;
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.confirmation-success-card p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.confirmation-pnr-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+    padding: 24px 28px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+}
+
+.confirmation-pnr-card > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.confirmation-pnr-card span {
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.confirmation-pnr-card strong {
+    color: #1d4ed8;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+
+.confirmation-status {
+    color: #16a34a !important;
+    font-size: 15px !important;
+}
+
+.confirmation-ticket-card,
+.confirmation-passengers-card,
+.confirmation-fare-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 28px;
+    margin-top: 22px;
+}
+
+.confirmation-ticket-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.confirmation-ticket-heading > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.confirmation-ticket-heading span {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 6px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.confirmation-ticket-heading h2 {
+    color: #1f2937;
+    font-size: 20px;
+}
+
+.confirmation-ticket-heading > strong {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 7px 12px;
+    border-radius: 6px;
+}
+
+.confirmation-journey {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    gap: 25px;
+}
+
+.confirmation-journey > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.confirmation-journey span {
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.confirmation-journey strong {
+    color: #111827;
+    font-size: 24px;
+}
+
+.confirmation-journey p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.confirmation-journey-line {
+    align-items: center;
+}
+
+.confirmation-journey-line div {
+    width: 100%;
+    height: 1px;
+    background: #d1d5db;
+}
+
+.confirmation-journey-line small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.confirmation-arrival {
+    text-align: right;
+}
+
+.confirmation-section-heading {
+    margin-bottom: 25px;
+}
+
+.confirmation-section-heading p {
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.confirmation-section-heading h2 {
+    color: #111827;
+    font-size: 25px;
+}
+
+.confirmation-passenger-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.confirmation-passenger {
+    display: grid;
+    grid-template-columns: 1.5fr 0.7fr 0.8fr 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.confirmation-passenger > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.confirmation-passenger span {
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.confirmation-passenger h3 {
+    color: #1f2937;
+    font-size: 17px;
+}
+
+.confirmation-passenger p {
+    color: #374151;
+    font-size: 14px;
+}
+
+.confirmation-fare-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.confirmation-fare-row span {
+    color: #6b7280;
+}
+
+.confirmation-fare-row strong {
+    color: #1f2937;
+}
+
+.confirmation-fare-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 22px;
+}
+
+.confirmation-fare-total span {
+    color: #374151;
+    font-weight: 600;
+}
+
+.confirmation-fare-total strong {
+    color: #111827;
+    font-size: 24px;
+}
+
+.confirmation-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.confirmation-primary-button,
+.confirmation-secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    padding: 0 22px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.confirmation-primary-button {
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border: 1px solid #2563eb;
+}
+
+.confirmation-secondary-button {
+    background: white;
+    color: #2563eb;
+    border: 1px solid #2563eb;
+}
+
+.confirmation-not-found {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #f5f7fa;
+    color: #1f2937;
+}
+
+.confirmation-not-found p {
+    color: #6b7280;
+}
+
+.confirmation-not-found a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+@media (max-width: 800px) {
+    .confirmation-header {
+        padding: 55px 20px 80px;
+    }
+
+    .confirmation-header h1 {
+        font-size: 36px;
+    }
+
+    .confirmation-content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .confirmation-journey {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .confirmation-arrival {
+        text-align: left;
+    }
+
+    .confirmation-journey-line {
+        align-items: flex-start;
+    }
+
+    .confirmation-passenger {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .confirmation-success-card {
+        align-items: flex-start;
+    }
+
+    .confirmation-pnr-card {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .confirmation-ticket-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .confirmation-ticket-heading > div {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .confirmation-actions {
+        flex-direction: column;
+    }
+
+    .confirmation-primary-button,
+    .confirmation-secondary-button {
+        width: 100%;
+    }
+}

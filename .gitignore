@@ -1,0 +1,63 @@
+# =========================
+# OS / System
+# =========================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# =========================
+# IDEs / Editors
+# =========================
+
+.idea/
+.vscode/
+*.iml
+
+
+# =========================
+# Java / Spring Boot
+# =========================
+
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+
+*.log
+
+
+# =========================
+# Node / React / Vite
+# =========================
+
+**/node_modules/
+**/dist/
+**/.vite/
+
+
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+
+**/application.properties
+**/application-local.properties
+
+
+# =========================
+# Temporary files
+# =========================
+
+*.tmp
+*.temp
+*.swp
+
+
+# =========================
+# Build / Generated files
+# =========================
+
+coverage/

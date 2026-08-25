@@ -1,0 +1,323 @@
+.home-page {
+  background: #f5f7fa;
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero-section {
+  background: #0f172a;
+  color: white;
+  padding: 90px 40px 80px;
+}
+
+.hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-tagline {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.hero-content h1 {
+  font-size: 64px;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.hero-content h1 span {
+  color: #60a5fa;
+}
+
+.hero-description {
+  max-width: 600px;
+  font-size: 19px;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+
+/* ========================================
+   HOME SEARCH CARD
+   ======================================== */
+
+.home-search-card {
+  max-width: 1100px;
+  margin: 50px auto 0;
+  background: white;
+  color: #1f2937;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.home-search-header {
+  margin-bottom: 25px;
+}
+
+.home-search-header h2 {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.home-search-header p {
+  color: #6b7280;
+}
+
+.home-search-fields {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+}
+
+
+/* ========================================
+   SEARCH INPUTS
+   ======================================== */
+
+.home-search-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-search-input-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.home-search-input-group input,
+.home-search-input-group select {
+  height: 48px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  padding: 0 12px;
+  font-size: 14px;
+  background: white;
+  outline: none;
+}
+
+.home-search-input-group input:focus,
+.home-search-input-group select:focus {
+  border-color: #2563eb;
+}
+
+
+/* ========================================
+   SEARCH SWAP BUTTON
+   ======================================== */
+
+.home-search-swap-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+
+/* ========================================
+   SEARCH BUTTON
+   ======================================== */
+
+.home-search-button {
+  height: 48px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.home-search-button:hover {
+  background: #1d4ed8;
+}
+
+
+/* ========================================
+   GENERAL HOME SECTIONS
+   ======================================== */
+
+.home-popular-section,
+.home-features-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 90px 40px;
+}
+
+.home-section-heading {
+  margin-bottom: 35px;
+}
+
+.home-section-heading p {
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.home-section-heading h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.home-section-heading span {
+  color: #6b7280;
+}
+
+
+/* ========================================
+   POPULAR ROUTES
+   ======================================== */
+
+.home-route-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.home-route-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 25px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.home-route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.home-route-card h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.home-route-card p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* ========================================
+   FEATURES
+   ======================================== */
+
+.home-features-section {
+  padding-top: 30px;
+  padding-bottom: 100px;
+}
+
+.home-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.home-feature-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.home-feature-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 20px;
+}
+
+.home-feature-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.home-feature-card p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+
+@media (max-width: 900px) {
+
+  .home-search-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-search-swap-button {
+    display: none;
+  }
+
+  .home-route-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .home-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+  }
+}
+
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+
+@media (max-width: 600px) {
+
+  .hero-section {
+    padding: 60px 20px 70px;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+  }
+
+  .home-search-card {
+    margin: 40px 20px 0;
+    padding: 22px;
+  }
+
+  .home-search-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .home-route-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-popular-section,
+  .home-features-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

@@ -1,0 +1,205 @@
+### Register a new user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@railnexus.com",
+  "password": "Test@12345",
+  "phone": "9876543210"
+}
+
+### Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@railnexus.com",
+  "password": "Test@12345"
+}
+
+
+
+### Login - Wrong Password
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@railnexus.com",
+  "password": "WrongPassword123"
+}
+
+### Login - Successful
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@railnexus.com",
+  "password": "Test@12345"
+}
+
+### Get current user
+GET http://localhost:8080/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzU2MDQ1MiwiZXhwIjoxNzg3NjQ2ODUyfQ.WctJgWM5-etExfGFEoiq690-XyY1D9OLylplbz3FSG2qpwbn40xRNwYbT_D34fwE
+
+
+### Test admin endpoint as USER
+GET http://localhost:8080/api/admin/test
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzU3MTUwMiwiZXhwIjoxNzg3NjU3OTAyfQ.OHjl0E4aFyepziFqA50-0_i3KDoeu4c5xlm7b46CIJCgVrU6jFIkoqDO11BrgiA4
+
+
+### Login as ADMIN
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+### Login as ADMIN
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@railnexus.com",
+  "password": "Test@12345"
+}
+
+### Test admin endpoint as ADMIN
+GET http://localhost:8080/api/admin/test
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3ODc1ODU0MDksImV4cCI6MTc4NzY3MTgwOX0.xlvQfdLi6_3rz7QkpA9IArKzA8aCHieWn50hSjI9YrMTj37sXb3q_ysIl2DYaW9a
+
+
+### Create Station
+POST http://localhost:8080/api/stations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+{
+  "name": "Bengaluru City Junction",
+  "code": "SBC",
+  "city": "Bengaluru",
+  "state": "Karnataka"
+}
+
+### Get All Stations
+GET http://localhost:8080/api/stations
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+
+### Get Station By Code
+GET http://localhost:8080/api/stations/SBC
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+
+### Get Non-Existent Station
+GET http://localhost:8080/api/stations/XYZ
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+
+###
+POST http://localhost:8080/api/trains
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+
+###
+POST http://localhost:8080/api/trains
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+Content-Type: application/json
+
+{
+"number": "12627",
+"name": "Karnataka Express",
+"type": "EXPRESS",
+"source": "Bengaluru",
+"destination": "New Delhi"
+}
+
+
+###
+GET http://localhost:8080/api/trains
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+
+###
+PUT http://localhost:8080/api/trains/12627
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+###
+PUT http://localhost:8080/api/trains/12627
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+Content-Type: application/json
+
+{
+    "number": "12627",
+    "name": "Karnataka Express Updated",
+    "type": "EXPRESS",
+    "source": "Bengaluru",
+    "destination": "New Delhi"
+}
+
+
+###
+GET http://localhost:8080/api/trains/12627
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyMzUyNCwiZXhwIjoxNzg3NzA5OTI0fQ.6g0vtHr7PMojtG89PhetUSkRKxE8tzH3AKd3yTRZ8nMkmqUqNVzaKXAxL7z3FWXd
+
+###
+GET http://localhost:8080/api/train-routes/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9
+
+
+###
+POST http://localhost:8080/api/trains
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9
+Content-Type: application/json
+
+{
+  "number": "12627",
+  "name": "Karnataka Express",
+  "type": "EXPRESS",
+  "source": "Bengaluru",
+  "destination": "New Delhi"
+}
+
+
+###
+POST http://localhost:8080/api/train-routes
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "stationId": 2,
+  "stopOrder": 2,
+  "arrivalTime": "08:50",
+  "departureTime": "08:55",
+  "distance": 18.0
+}
+
+
+###
+POST http://localhost:8080/api/stations
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9
+Content-Type: application/json
+
+{
+  "code": "KJM",
+  "name": "Krishnarajapuram",
+  "city": "Bengaluru",
+  "state": "Karnataka"
+}
+
+###
+POST http://localhost:8080/api/train-schedules
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9
+Content-Type: application/json
+
+{
+"trainId": 2,
+"dayOfWeek": "MONDAY"
+}
+
+###
+GET http://localhost:8080/api/train-schedules/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9
+
+###
+GET http://localhost:8080/api/train-routes/search?fromStationId=2&toStationId=1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9

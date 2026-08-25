@@ -1,0 +1,353 @@
+.payment-page {
+    min-height: 100vh;
+    background: #f5f7fa;
+}
+
+.payment-header {
+    background: #0f172a;
+    color: white;
+    padding: 75px 40px 90px;
+}
+
+.payment-header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.payment-back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 170px;
+    height: 42px;
+    padding: 0 18px;
+
+    margin-bottom: 34px;
+
+    border: 1px solid #93c5fd;
+    border-radius: 7px;
+
+    background: white;
+    color: #0f172a;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+}
+
+.payment-tagline {
+    color: #93c5fd;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.payment-header h1 {
+    font-size: 42px;
+    margin-bottom: 14px;
+}
+
+.payment-header-content > p {
+    color: #cbd5e1;
+    font-size: 17px;
+}
+
+.payment-content {
+    max-width: 1100px;
+    margin: -55px auto 0;
+    padding: 0 40px 90px;
+    position: relative;
+}
+
+.payment-journey-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.payment-journey-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.payment-journey-heading > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.payment-journey-heading span {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 6px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.payment-journey-heading h2 {
+    font-size: 20px;
+    color: #1f2937;
+}
+
+.payment-journey-heading > strong {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 7px 12px;
+    border-radius: 6px;
+}
+
+.payment-journey-details {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    gap: 25px;
+}
+
+.payment-journey-details > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.payment-journey-details > div:first-child {
+    text-align: left;
+}
+
+.payment-journey-details > div:last-child {
+    text-align: right;
+}
+
+.payment-journey-details span {
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.payment-journey-details strong {
+    color: #111827;
+    font-size: 24px;
+}
+
+.payment-journey-details p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.payment-journey-line {
+    align-items: center;
+}
+
+.payment-journey-line div {
+    width: 100%;
+    height: 1px;
+    background: #d1d5db;
+}
+
+.payment-layout {
+    display: grid;
+    grid-template-columns: 1.6fr 0.9fr;
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.payment-passenger-card,
+.payment-summary-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 28px;
+}
+
+.payment-summary-card {
+    height: fit-content;
+}
+
+.payment-section-heading {
+    margin-bottom: 25px;
+}
+
+.payment-section-heading p {
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.payment-section-heading h2 {
+    color: #111827;
+    font-size: 25px;
+}
+
+.payment-passenger-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.payment-passenger {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.payment-passenger > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.payment-passenger > div:first-child span {
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.payment-passenger h3 {
+    color: #1f2937;
+    font-size: 17px;
+}
+
+.payment-passenger p {
+    color: #6b7280;
+    font-size: 13px;
+    margin: 0;
+}
+
+.payment-summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.payment-summary-row span {
+    color: #6b7280;
+}
+
+.payment-summary-row strong {
+    color: #1f2937;
+}
+
+.payment-summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+}
+
+.payment-summary-total span {
+    color: #374151;
+    font-weight: 600;
+}
+
+.payment-summary-total strong {
+    color: #111827;
+    font-size: 24px;
+}
+
+.payment-pay-button {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.payment-pay-button:hover {
+    background: #1d4ed8;
+}
+
+.payment-not-found {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #f5f7fa;
+    color: #1f2937;
+}
+
+.payment-not-found p {
+    color: #6b7280;
+}
+
+.payment-not-found a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+@media (max-width: 800px) {
+    .payment-header {
+        padding: 50px 20px 80px;
+    }
+
+    .payment-header h1 {
+        font-size: 36px;
+    }
+
+    .payment-content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .payment-journey-details {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .payment-journey-details > div:last-child {
+        text-align: left;
+    }
+
+    .payment-journey-line {
+        align-items: flex-start;
+    }
+
+    .payment-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-passenger {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .payment-journey-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .payment-journey-heading > div {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .payment-passenger-card,
+    .payment-summary-card {
+        padding: 22px;
+    }
+}

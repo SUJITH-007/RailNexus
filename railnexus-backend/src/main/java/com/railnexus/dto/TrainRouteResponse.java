@@ -1,5 +1,6 @@
 package com.railnexus.dto;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record TrainRouteResponse(
@@ -14,6 +15,8 @@ public record TrainRouteResponse(
         String stationName,
 
         Integer stopOrder,
+
+        LocalDate journeyDate,
 
         LocalTime arrivalTime,
         LocalTime departureTime,

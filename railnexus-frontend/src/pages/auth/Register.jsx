@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Register.css";
 
 function Register() {
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -13,8 +14,9 @@ function Register() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         setError("");
@@ -45,7 +47,47 @@ function Register() {
             return;
         }
 
-        console.log("Registration form submitted");
+        try {
+            setLoading(true);
+
+            const response = await fetch(
+                "http://localhost:8080/api/auth/register",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: name.trim(),
+                        email: email.trim(),
+                        password: password,
+                        phone: phone.trim(),
+                    }),
+                }
+            );
+
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok) {
+                setError(
+                    data?.message ||
+                    data?.error ||
+                    "Registration failed. Please try again."
+                );
+                return;
+            }
+
+            navigate("/login");
+
+        } catch (error) {
+            console.error("Registration error:", error);
+
+            setError(
+                "Unable to connect to the server. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -212,8 +254,9 @@ function Register() {
                     <button
                         type="submit"
                         className="auth-submit-button"
+                        disabled={loading}
                     >
-                        Create Account
+                        {loading ? "Creating Account..." : "Create Account"}
                     </button>
 
                 </form>

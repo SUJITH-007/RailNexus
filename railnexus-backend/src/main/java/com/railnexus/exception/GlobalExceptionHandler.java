@@ -60,6 +60,19 @@ public class GlobalExceptionHandler {
         );
     }
 
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleIllegalArgumentException(
+            IllegalArgumentException exception
+    ) {
+        return new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                exception.getMessage(),
+                LocalDateTime.now()
+        );
+    }
+
     public record ErrorResponse(
             int status,
             String message,

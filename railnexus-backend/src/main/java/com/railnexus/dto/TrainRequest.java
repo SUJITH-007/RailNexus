@@ -1,6 +1,11 @@
 package com.railnexus.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import com.railnexus.entity.TrainStatus;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 
 public record TrainRequest(
 
@@ -17,6 +22,13 @@ public record TrainRequest(
         String source,
 
         @NotBlank(message = "Destination is required")
-        String destination
+        String destination,
+
+        @NotNull(message = "Train status is required")
+        TrainStatus status,
+
+        @NotEmpty(message = "At least one train class is required")
+        List<Long> classIds
+
 ) {
 }

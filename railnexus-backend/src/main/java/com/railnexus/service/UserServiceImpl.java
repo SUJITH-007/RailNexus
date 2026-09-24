@@ -13,6 +13,7 @@ import com.railnexus.exception.BlockedUserException;
 import com.railnexus.exception.InvalidCredentialsException;
 import com.railnexus.dto.auth.LoginResponse;
 import com.railnexus.security.JwtService;
+import com.railnexus.dto.user.UpdateProfileRequest;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -70,4 +71,42 @@ public class UserServiceImpl implements UserService {
 
         return new LoginResponse(token, "Bearer");
     }
+
+
+    @Override
+    public LoginResponse updateProfile(
+            String currentEmail,
+            UpdateProfileRequest request
+    ) {
+
+        User user = userRepository.findByEmail(currentEmail)
+                .orElseThrow(() ->
+                        new InvalidCredentialsException(
+                                "Authenticated user not found"
+                        )
+                );
+
+        String newEmail = request.email().trim();
+
+        if (!newEmail.equalsIgnoreCase(user.getEmail())
+                && userRepository.existsByEmail(newEmail)) {
+
+            throw new EmailAlreadyExistsException(
+                    "Email is already registered"
+            );
+        }
+
+        user.setName(request.name().trim());
+        user.setEmail(newEmail);
+        user.setPhone(request.phone().trim());
+
+        User savedUser = userRepository.save(user);
+
+        String token = jwtService.generateToken(savedUser);
+
+        return new LoginResponse(token, "Bearer");
+    }
+
+
+
 }

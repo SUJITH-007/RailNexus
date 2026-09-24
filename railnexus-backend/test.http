@@ -203,3 +203,1234 @@ Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iL
 ###
 GET http://localhost:8080/api/train-routes/search?fromStationId=2&toStationId=1
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzYyODgxOCwiZXhwIjoxNzg3NzE1MjE4fQ.JCjHoEOTBp5rr2ceSRvHbIUqoqpvnjwoi57gplb4IKF-KXqt-FP-VavFPcRD4hT9
+
+###
+GET http://localhost:8080/api/train-classes
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTMwNSwiZXhwIjoxNzg3Nzk1NzA1fQ.0DevYtnan4I6zMgco9_00jEcTe5McOht9I6kEujiEG7YR-tUS_WXgljEy6ZlRanK
+
+
+###
+POST http://localhost:8080/api/train-classes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+
+{
+  "code": "2S",
+  "name": "Second Sitting",
+  "ac": false
+}
+
+###
+GET http://localhost:8080/api/train-classes
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+
+[
+  {
+    "id": 1,
+    "code": "1A",
+    "name": "First AC",
+    "ac": true
+  }
+]
+
+
+###
+POST http://localhost:8080/api/trains
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+Content-Type: application/json
+
+{
+  "number": "12627",
+  "name": "Karnataka Express",
+  "type": "EXPRESS",
+  "source": "Bengaluru",
+  "destination": "New Delhi",
+  "classIds": [1, 2, 3, 4]
+}
+
+
+###
+PUT http://localhost:8080/api/trains/12627
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+Content-Type: application/json
+
+{
+  "number": "12627",
+  "name": "Karnataka Express",
+  "type": "EXPRESS",
+  "source": "Bengaluru",
+  "destination": "New Delhi",
+  "classIds": [1, 2, 3, 4]
+}
+
+
+###
+POST http://localhost:8080/api/trains
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+Content-Type: application/json
+
+{
+"number": "16525",
+"name": "Karnataka Express Test",
+"type": "EXPRESS",
+"source": "Bengaluru",
+"destination": "New Delhi",
+"classIds": [1, 2, 3, 4]
+}
+
+###
+GET http://localhost:8080/api/trains/16525
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+
+
+###
+POST http://localhost:8080/api/stations
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+Content-Type: application/json
+
+{
+  "name": "KSR Bengaluru",
+  "code": "SBC",
+  "city": "Bengaluru",
+  "state": "Karnataka"
+}
+
+
+###
+GET http://localhost:8080/api/stations
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcwOTkzOCwiZXhwIjoxNzg3Nzk2MzM4fQ._LSkyPeSLtxJ5D2EOLtiJhDNBnT_vhg5jWEBDrU64DeajwwbmUQmjaNzLuaWeN-o
+
+
+###
+POST http://localhost:8080/api/train-routes
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "stationId": 5,
+  "stopOrder": 5,
+  "arrivalTime": "18:00:00",
+  "departureTime": "18:10:00",
+  "distance": 2150
+}
+
+
+###
+GET http://localhost:8080/api/train-routes/train/3
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+
+
+###
+GET http://localhost:8080/api/train-routes/search?fromStationId=1&toStationId=3
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+
+
+### Create Coach
+POST http://localhost:8080/api/coaches
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "classId": 3,
+  "coachNumber": "B1",
+  "capacity": 64
+}
+
+
+### Get Coaches For Train
+GET http://localhost:8080/api/coaches/train/3
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+
+
+###
+POST http://localhost:8080/api/seats
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+Content-Type: application/json
+
+{
+  "coachId": 1,
+  "seatNumber": 73,
+  "berthType": "LOWER"
+}
+
+
+###
+GET http://localhost:8080/api/seats/coach/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+
+
+###
+POST http://localhost:8080/api/seats/generate/coach/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+
+###
+GET http://localhost:8080/api/seats/coach/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4NzcxNTIyMSwiZXhwIjoxNzg3ODAxNjIxfQ.-vbipGXWsa7x3RBJHwCJQ38Wzl6cTJJ0P99ppBiTmiyTpkjZ9rF0n88gJFSpx5La
+
+
+### Create Booking
+
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0MTMyOCwiZXhwIjoxNzg3ODI3NzI4fQ.ngYobzSjPrENmaTtb3D-XlR7URivEMZZ5jh9hAuG4SHDbt0ccDaG4rI-MuPrxY3V
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-15",
+  "passengers": [
+    {
+      "name": "Sujith",
+      "age": 22,
+      "gender": "MALE",
+      "seatId": 25
+    }
+  ]
+}
+
+
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0Mjc4MywiZXhwIjoxNzg3ODI5MTgzfQ.XEtCk-_BmQc0uZN9u6rO0ToQnRCbHn6burc2omD4vz-gxxhA5lvwWNAa7JEIRp43
+Content-Type: application/json
+
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+"trainId": 3,
+"fromStation": "SBC",
+"toStation": "SA",
+"journeyDate": "2026-09-01",
+"passengers": [
+{
+"name": "Test Passenger",
+"age": 22,
+"gender": "MALE",
+"seatId": 2
+}
+]
+}
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+"trainId": 3,
+"fromStation": "SBC",
+"toStation": "SA",
+"journeyDate": "2026-09-01",
+"passengers": [
+{
+"name": "Another Passenger",
+"age": 25,
+"gender": "MALE",
+"seatId": 2
+}
+]
+}
+
+###
+GET http://localhost:8080/api/bookings/RN51EC5F32
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+###
+PUT http://localhost:8080/api/bookings/RN51EC5F32/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-01",
+  "passengers": [
+    {
+      "seatId": 2,
+      "name": "Test Passenger",
+      "age": 22,
+      "gender": "MALE"
+    }
+  ]
+}
+
+
+### Register a new user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Second Test User",
+  "email": "second@railnexus.com",
+  "password": "Test@12345",
+  "phone": "9876543211"
+}
+
+### Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "second@railnexus.com",
+  "password": "Test@12345"
+}
+
+###
+PUT http://localhost:8080/api/bookings/RN88710C32/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzZWNvbmRAcmFpbG5leHVzLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzg3NzQ3NDIyLCJleHAiOjE3ODc4MzM4MjJ9.CjAudOv8Rp7vdGfU6nyl-z9rLbhgLlnK8RPRqp0u96h1GPY2JcEF7YqQrCRrRbuW
+
+###
+PUT http://localhost:8080/api/bookings/RN88710C32/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+###
+GET http://localhost:8080/api/trains/search?from=SBC&to=SA
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+### Create booking
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-01",
+  "passengers": [
+    {
+      "name": "Test Passenger",
+      "age": 22,
+      "gender": "MALE",
+      "seatId": 2
+    }
+  ]
+}
+
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+"trainId": 3,
+"fromStation": "SBC",
+"toStation": "SA",
+"journeyDate": "2026-09-01",
+"passengers": [
+{
+"name": "Second Passenger",
+"age": 25,
+"gender": "MALE",
+"seatId": 2
+}
+]
+}
+
+###
+GET http://localhost:8080/api/train-routes/train/3
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "KJM",
+  "toStation": "MAS",
+  "journeyDate": "2026-09-01",
+  "passengers": [
+    {
+      "name": "Fourth Passenger",
+      "age": 25,
+      "gender": "MALE",
+      "seatId": 2
+    }
+  ]
+}
+
+###
+GET http://localhost:8080/api/seats/coach/2/availability?journeyDate=2026-09-01&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+
+### FINAL TEST 1 - Create Booking
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-05",
+  "passengers": [
+    {
+      "name": "Sujith",
+      "age": 22,
+      "gender": "MALE",
+      "seatId": 2
+    }
+  ]
+}
+
+
+### FINAL TEST 2 - Check Seat Availability
+GET http://localhost:8080/api/seats/coach/2/availability?journeyDate=2026-09-05&from=SBC&to=SA
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+
+### FINAL TEST 3 - Duplicate Seat Booking
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-05",
+  "passengers": [
+    {
+      "name": "Another Passenger",
+      "age": 25,
+      "gender": "MALE",
+      "seatId": 2
+    }
+  ]
+}
+
+
+### FINAL TEST 4 - Cancel Booking
+PUT http://localhost:8080/api/bookings/RNA5384027/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+### FINAL TEST 5 - Get Cancelled Booking
+GET http://localhost:8080/api/bookings/RNA5384027
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+### FINAL TEST 6 - Seat Available After Cancellation
+GET http://localhost:8080/api/seats/coach/2/availability?journeyDate=2026-09-05&from=SBC&to=SA
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+
+
+### FINAL TEST 7 - Rebook Seat After Cancellation
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-05",
+  "passengers": [
+    {
+      "name": "First Passenger",
+      "age": 22,
+      "gender": "MALE",
+      "seatId": 2
+    }
+  ]
+}
+
+
+### FINAL TEST 8 - Duplicate Seat Booking
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc0NTY3NSwiZXhwIjoxNzg3ODMyMDc1fQ.Xx7Q5yGgiz_-UJX_asXdJp-uXcePJ7svOsjD070MECs2SUy2dFpKihBC0vCcErLE
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-05",
+  "passengers": [
+    {
+      "name": "Second Passenger",
+      "age": 25,
+      "gender": "MALE",
+      "seatId": 2
+    }
+  ]
+}
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "second@railnexus.com",
+  "password": "Test@12345"
+}
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc2Nzc2NiwiZXhwIjoxNzg3ODU0MTY2fQ.gV1YcfzL6z02MwnnqnlsiVmpkoZ-tYtkeCPEYjKpII7dX9-lLjjJ0MhaFrZlbfTB
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "SA",
+  "journeyDate": "2026-09-10",
+  "passengers": [
+    {
+      "name": "Sujith",
+      "age": 22,
+      "gender": "MALE",
+      "seatId": 3
+    }
+  ]
+}
+
+###
+GET http://localhost:8080/api/bookings/RN360BF31C
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QHJhaWxuZXh1cy5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc4Nzc2Nzc2NiwiZXhwIjoxNzg3ODU0MTY2fQ.gV1YcfzL6z02MwnnqnlsiVmpkoZ-tYtkeCPEYjKpII7dX9-lLjjJ0MhaFrZlbfTB
+
+
+###
+GET http://localhost:8080/api/bookings/RN360BF31C
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzZWNvbmRAcmFpbG5leHVzLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzg3NzY3OTMyLCJleHAiOjE3ODc4NTQzMzJ9.f3z6BkOQ2NeRHm6gtm6Qti0if1lfKcPN_BFuFNNHqqczqU4S26xtiMg-5dGY_mCm
+
+
+### Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@railnexus.com",
+  "password": "Admin@123"
+}
+
+###
+GET http://localhost:8080/api/admin/dashboard
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3ODE5MjAzLCJleHAiOjE3ODc5MDU2MDN9.uDsdpipc2xSG8vc8i9u4lanM7BasPbgInm04BBsi0GTj63UpptO66jaR74nK-zy1
+
+###
+GET http://localhost:8080/api/trains/16525
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3ODE5MjAzLCJleHAiOjE3ODc5MDU2MDN9.uDsdpipc2xSG8vc8i9u4lanM7BasPbgInm04BBsi0GTj63UpptO66jaR74nK-zy1
+
+###
+PUT http://localhost:8080/api/trains/16525
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3ODE5MjAzLCJleHAiOjE3ODc5MDU2MDN9.uDsdpipc2xSG8vc8i9u4lanM7BasPbgInm04BBsi0GTj63UpptO66jaR74nK-zy1
+Content-Type: application/json
+
+{
+  "number": "16525",
+  "name": "Karnataka Express Updated",
+  "type": "EXPRESS",
+  "source": "Bengaluru",
+  "destination": "New Delhi",
+  "classIds": [1, 2, 3, 4],
+  "status": "ACTIVE"
+
+}
+
+###
+POST http://localhost:8080/api/trains
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3ODE5MjAzLCJleHAiOjE3ODc5MDU2MDN9.uDsdpipc2xSG8vc8i9u4lanM7BasPbgInm04BBsi0GTj63UpptO66jaR74nK-zy1
+
+{
+"number": "99999",
+"name": "RailNexus Test Express",
+"type": "EXPRESS",
+"source": "Bengaluru",
+"destination": "New Delhi",
+"classIds": [1, 2, 3, 4],
+"status": "ACTIVE"
+}
+
+
+###
+GET http://localhost:8080/api/trains
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3ODE5MjAzLCJleHAiOjE3ODc5MDU2MDN9.uDsdpipc2xSG8vc8i9u4lanM7BasPbgInm04BBsi0GTj63UpptO66jaR74nK-zy1
+
+
+
+###
+PUT http://localhost:8080/api/admin/users/1/status?status=ACTIVE
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3ODE5MjAzLCJleHAiOjE3ODc5MDU2MDN9.uDsdpipc2xSG8vc8i9u4lanM7BasPbgInm04BBsi0GTj63UpptO66jaR74nK-zy1
+
+
+### Get current ADMIN profile
+GET http://localhost:8080/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3OTE1NTQ5LCJleHAiOjE3ODgwMDE5NDl9.dIuHOvDguH5pNjwB2MVspZVjOg7yK-2ByQq0BChJYAr_guWHZ6WOMowgfhZNd_EY
+
+
+### Update ADMIN profile
+PUT http://localhost:8080/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3OTE1NTQ5LCJleHAiOjE3ODgwMDE5NDl9.dIuHOvDguH5pNjwB2MVspZVjOg7yK-2ByQq0BChJYAr_guWHZ6WOMowgfhZNd_EY
+Content-Type: application/json
+
+{
+  "name": "RailNexus Administrator",
+  "email": "admin@railnexus.com",
+  "phone": "9999999999"
+}
+
+
+### Get updated ADMIN profile
+GET http://localhost:8080/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg3OTE1NTQ5LCJleHAiOjE3ODgwMDE5NDl9.dIuHOvDguH5pNjwB2MVspZVjOg7yK-2ByQq0BChJYAr_guWHZ6WOMowgfhZNd_EY
+
+{
+  "id": 4,
+  "name": "RailNexus Administrator",
+  "email": "admin@railnexus.com",
+  "phone": "9999999999",
+  "role": "ADMIN",
+  "status": "ACTIVE",
+  "createdAt": "..."
+}
+
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "usertest@railnexus.com",
+  "password": "Test@12345"
+}
+
+
+
+###
+GET http://localhost:8080/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODc5MjIzNjMsImV4cCI6MTc4ODAwODc2M30.u3w-HNqvyJfDs94InYyAsYpAN-UGAoD_auNlCfbc2mpaVfleSrUAeJIF3X-v0HgF
+
+
+
+### Search trains between stations
+GET http://localhost:8080/api/trains/search?from=SBC&to=KJM&date=2026-08-30
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODgwMDk0ODMsImV4cCI6MTc4ODA5NTg4M30.k-lsquzWRGrTt-r69t23UJLYYc108bPvIRcm0QlHsQXZnekFfiUV4dMGoSmGM01X
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@railnexus.com",
+  "password": "Admin@123"
+}
+
+
+###
+GET http://localhost:8080/api/stations
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzMwMjgzLCJleHAiOjE3ODg0MTY2ODN9.osUYNsZWW4i33B49ceHVMpaahB6JRHuvcTytZagBf56PPLWE_4LURtHF_cFSpTKc
+
+
+###
+GET http://localhost:8080/api/coaches/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzMwMjgzLCJleHAiOjE3ODg0MTY2ODN9.osUYNsZWW4i33B49ceHVMpaahB6JRHuvcTytZagBf56PPLWE_4LURtHF_cFSpTKc
+
+
+###
+GET http://localhost:8080/api/train-routes/search?fromStationId=1&toStationId=2&dayOfWeek=WEDNESDAY
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzMwMjgzLCJleHAiOjE3ODg0MTY2ODN9.osUYNsZWW4i33B49ceHVMpaahB6JRHuvcTytZagBf56PPLWE_4LURtHF_cFSpTKc
+
+
+### Create Train Route
+POST http://localhost:8080/api/train-routes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzMwMjgzLCJleHAiOjE3ODg0MTY2ODN9.osUYNsZWW4i33B49ceHVMpaahB6JRHuvcTytZagBf56PPLWE_4LURtHF_cFSpTKc
+
+{
+  "trainId": 2,
+  "stationId": 1,
+  "stopOrder": 1,
+  "journeyDate": "2026-09-05",
+  "arrivalTime": null,
+  "departureTime": "06:00:00",
+  "distance": 0
+}
+
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzMwMjgzLCJleHAiOjE3ODg0MTY2ODN9.osUYNsZWW4i33B49ceHVMpaahB6JRHuvcTytZagBf56PPLWE_4LURtHF_cFSpTKc
+Content-Type: application/json
+
+{
+"trainId": 2,
+"fromStation": "SBC",
+"toStation": "KJM",
+"journeyDate": "2026-09-04",
+"passengers": [
+{
+"name": "Test User",
+"age": 22,
+"gender": "MALE",
+"seatId": 1
+}
+]
+}
+
+
+### Create Coach (Admin)
+POST http://localhost:8080/api/admin/coaches
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "classCode": "SL",
+  "coachNumber": "S1",
+  "capacity": 72
+}
+
+### Get Train Classes
+GET http://localhost:8080/api/train-classes
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+
+###
+POST http://localhost:8080/api/admin/coaches
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+Content-Type: application/json
+
+{
+    "trainId": 2,
+    "classId": 3,
+    "coachNumber": "A1",
+    "capacity": 52
+}
+
+###
+GET http://localhost:8080/api/admin/train-routes/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+
+###
+PUT http://localhost:8080/api/admin/train-routes/5
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "stationId": 5,
+  "stopOrder": 3,
+  "journeyDate": "2026-09-10",
+  "arrivalTime": "23:10:00",
+  "departureTime": "23:15:00",
+  "distance": 430.5
+}
+
+###
+GET http://localhost:8080/api/admin/train-routes/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+
+### Create Monday Schedule
+POST http://localhost:8080/api/admin/train-schedules
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+{
+  "trainId": 2,
+  "dayOfWeek": "MONDAY"
+}
+
+
+### Get Train 2 Schedules
+GET http://localhost:8080/api/admin/train-schedules/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+
+### Try Duplicate Monday Schedule
+POST http://localhost:8080/api/admin/train-schedules
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+{
+  "trainId": 2,
+  "dayOfWeek": "MONDAY"
+}
+
+
+### Update Schedule
+PUT http://localhost:8080/api/admin/train-schedules/6
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+{
+  "trainId": 2,
+  "dayOfWeek": "FRIDAY"
+}
+
+### Verify Updated Schedule
+
+GET http://localhost:8080/api/admin/train-schedules/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+
+### Try Duplicate Day During Update
+
+PUT http://localhost:8080/api/admin/train-schedules/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+{
+  "trainId": 2,
+  "dayOfWeek": "FRIDAY"
+}
+
+### Delete Schedule
+
+DELETE http://localhost:8080/api/admin/train-schedules/6
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+
+### Verify Schedule Deletion
+
+GET http://localhost:8080/api/admin/train-schedules/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4MzYxNDgwLCJleHAiOjE3ODg0NDc4ODB9.l2LhtBQUq5f7yc05CRcD_j-PrmA4MO_P6a4TgY0w82u60zsx6PeYxJcuixgU7nuO
+
+
+### Delete Non Existing Schedule
+DELETE http://localhost:8080/api/admin/train-schedules/99999
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4NDUxOTIyLCJleHAiOjE3ODg1MzgzMjJ9.DHkgRoJnYUJ-N3VM1iaB4QHah4wDQiEQm6EbIGoq4X1iDTKUWZmk5-EGqR43Pbk8
+
+###
+GET http://localhost:8080/api/admin/seats/coach/1
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4NDUyNTkyLCJleHAiOjE3ODg1Mzg5OTJ9.EQwHU4jffI4VF3qPOV0CPYgNLkkvFT3LbcUlnSbUnfDB_74QVuDQvmyd7V74bQ9R
+
+
+###
+GET http://localhost:8080/api/users/me
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4NDUyNTkyLCJleHAiOjE3ODg1Mzg5OTJ9.EQwHU4jffI4VF3qPOV0CPYgNLkkvFT3LbcUlnSbUnfDB_74QVuDQvmyd7V74bQ9R
+
+
+###
+GET http://localhost:8080/api/seats/coach/4/availability?journeyDate=2026-09-10&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4NzQ3NjY5LCJleHAiOjE3ODg4MzQwNjl9.omp3wQaY_Qb3qBDq0qme-Cw43AFtTvwN-iqmQGkb5CJaeJCjTkNw7TDwsBUsv3a1
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4NzQ3NjY5LCJleHAiOjE3ODg4MzQwNjl9.omp3wQaY_Qb3qBDq0qme-Cw43AFtTvwN-iqmQGkb5CJaeJCjTkNw7TDwsBUsv3a1
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "fromStation": "SBC",
+  "toStation": "KJM",
+  "journeyDate": "2026-09-10",
+  "passengers": [
+    {
+      "name": "Test Passenger",
+      "age": 22,
+      "gender": "MALE",
+      "seatId": 74
+    }
+  ]
+}
+
+
+###
+POST http://localhost:8080/api/admin/seat-blocks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4NzQ3NjY5LCJleHAiOjE3ODg4MzQwNjl9.omp3wQaY_Qb3qBDq0qme-Cw43AFtTvwN-iqmQGkb5CJaeJCjTkNw7TDwsBUsv3a1
+
+{
+  "seatId": 75,
+  "journeyDate": "2026-09-10",
+  "reason": "Maintenance"
+}
+
+
+###
+POST http://localhost:8080/api/bookings/seat-recommendations?trainId=2&journeyDate=2026-09-10&fromStation=SBC&toStation=KJM&passengerCount=4&preference=NO_PREFERENCE
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg3NTc3NzQsImV4cCI6MTc4ODg0NDE3NH0.FKTM4LhGAPPGrrypK8NdPudmIq39N48BuhL5Q4vOWrtNnhecQLPJpt92r00mrpN3
+
+
+###
+POST http://localhost:8080/api/admin/seat-blocks
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg4NzQ3NjY5LCJleHAiOjE3ODg4MzQwNjl9.omp3wQaY_Qb3qBDq0qme-Cw43AFtTvwN-iqmQGkb5CJaeJCjTkNw7TDwsBUsv3a1
+Content-Type: application/json
+
+{
+  "seatId": 75,
+  "journeyDate": "2026-09-10",
+  "reason": "Booking protection test"
+}
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg3NTc3NzQsImV4cCI6MTc4ODg0NDE3NH0.FKTM4LhGAPPGrrypK8NdPudmIq39N48BuhL5Q4vOWrtNnhecQLPJpt92r00mrpN3
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "fromStation": "SBC",
+  "toStation": "KJM",
+  "journeyDate": "2026-09-10",
+  "seatPreference": "NO_PREFERENCE",
+  "passengers": [
+    {
+      "name": "Blocked Seat Test",
+      "age": 22,
+      "gender": "MALE",
+      "seatId": 75
+    }
+  ]
+}
+
+###
+POST http://localhost:8080/api/bookings/seat-recommendations?trainId=2&journeyDate=2026-09-10&fromStation=SBC&toStation=KJM&passengerCount=4&preference=CONSECUTIVE
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg4Mzk5MDEsImV4cCI6MTc4ODkyNjMwMX0.TedZak1W7pY6u524hvcA3l9-UlfH7cT6v7yVqvTriflLrKZE7JOedr7kBAUY2YBJ
+
+###
+POST http://localhost:8080/api/bookings/seat-recommendations?trainId=2&journeyDate=2026-09-10&fromStation=SBC&toStation=KJM&passengerCount=4&preference=CONSECUTIVE
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg4Mzk5MDEsImV4cCI6MTc4ODkyNjMwMX0.TedZak1W7pY6u524hvcA3l9-UlfH7cT6v7yVqvTriflLrKZE7JOedr7kBAUY2YBJ
+
+
+###
+POST http://localhost:8080/api/bookings/seat-recommendations?trainId=2&journeyDate=2026-09-10&fromStation=SBC&toStation=KJM&passengerCount=4&preference=CONSECUTIVE
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg4Mzk5MDEsImV4cCI6MTc4ODkyNjMwMX0.TedZak1W7pY6u524hvcA3l9-UlfH7cT6v7yVqvTriflLrKZE7JOedr7kBAUY2YBJ
+
+
+###
+GET http://localhost:8080/api/seats/coach/4/availability?journeyDate=2026-09-10&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg4Mzk5MDEsImV4cCI6MTc4ODkyNjMwMX0.TedZak1W7pY6u524hvcA3l9-UlfH7cT6v7yVqvTriflLrKZE7JOedr7kBAUY2YBJ
+
+
+###
+GET http://localhost:8080/api/bookings/class-availability?trainId=2&journeyDate=2026-09-10&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg5Mzk1NzAsImV4cCI6MTc4OTAyNTk3MH0.gw27pi71sRxoP43fIEx3jTPqarwh-iVuRwYeTHP8AsQGu0g6xPOZXj6k-YqvJtDm
+
+###
+POST http://localhost:8080/api/bookings/seat-recommendations?trainId=2&journeyDate=2026-09-10&fromStation=SBC&toStation=KJM&classCode=3A&passengerCount=1&preference=CONSECUTIVE&berthPreference=LOWER
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODg5Mzk1NzAsImV4cCI6MTc4OTAyNTk3MH0.gw27pi71sRxoP43fIEx3jTPqarwh-iVuRwYeTHP8AsQGu0g6xPOZXj6k-YqvJtDm
+
+###
+POST http://localhost:8080/api/admin/seats/generate/coach/10
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MDQ1NDAxLCJleHAiOjE3ODkxMzE4MDF9.suMiMgL814Q1Kzdrsw2Tm1_rV506cqaL05Fxzz4SYQegvE9aLgqfvrDTrqgsm5ix
+
+###
+POST http://localhost:8080/api/admin/coaches
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MDQ1NDAxLCJleHAiOjE3ODkxMzE4MDF9.suMiMgL814Q1Kzdrsw2Tm1_rV506cqaL05Fxzz4SYQegvE9aLgqfvrDTrqgsm5ix
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "classId": 3,
+  "configurationId": 4,
+  "coachNumber": "B2"
+}
+
+
+###
+POST http://localhost:8080/api/admin/coaches
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MDQ1NDAxLCJleHAiOjE3ODkxMzE4MDF9.suMiMgL814Q1Kzdrsw2Tm1_rV506cqaL05Fxzz4SYQegvE9aLgqfvrDTrqgsm5ix
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "classId": 3,
+  "configurationId": 4,
+  "coachNumber": "B3"
+}
+
+###
+GET http://localhost:8080/api/admin/seats/coach/4
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MTM0NzQ1LCJleHAiOjE3ODkyMjExNDV9.wkiNx5KdezHexKp2XHPkP0rSkwz-9hrmknmF5Ae5TpoiFrcRCU8QnU8aj8MK7D3M
+
+
+###
+PUT http://localhost:8080/api/admin/train-routes/train/2/journey-date?journeyDate=2026-09-12
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MTc1NTUzLCJleHAiOjE3ODkyNjE5NTN9.b2puCD96lv058Vtq30ZRj75GvdEVyj_A44VmE7nOz-d0oQwc8I9BxXu882MkWdoV
+
+###
+POST http://localhost:8080/api/admin/seat-blocks
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MTc1NTUzLCJleHAiOjE3ODkyNjE5NTN9.b2puCD96lv058Vtq30ZRj75GvdEVyj_A44VmE7nOz-d0oQwc8I9BxXu882MkWdoV
+Content-Type: application/json
+
+{
+  "seatId": 1,
+  "journeyDate": "2026-09-13",
+  "reason": "Maintenance"
+}
+
+###
+POST http://localhost:8080/api/admin/seat-blocks
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MTc1NTUzLCJleHAiOjE3ODkyNjE5NTN9.b2puCD96lv058Vtq30ZRj75GvdEVyj_A44VmE7nOz-d0oQwc8I9BxXu882MkWdoV
+Content-Type: application/json
+
+{
+  "seatId": 74,
+  "journeyDate": "2026-09-13",
+  "reason": "Maintenance"
+}
+
+
+###
+GET http://localhost:8080/api/admin/seats/coach/4/status?journeyDate=2026-09-13&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5MTc1NTUzLCJleHAiOjE3ODkyNjE5NTN9.b2puCD96lv058Vtq30ZRj75GvdEVyj_A44VmE7nOz-d0oQwc8I9BxXu882MkWdoV
+
+###
+GET http://localhost:8080/api/seats/coach/4/availability?journeyDate=2026-09-13&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODkyNjg2NjIsImV4cCI6MTc4OTM1NTA2Mn0.zbACW23PykDB7cn0E31cqYDjx0LhKPyoOAPnH9EeU6Ae7kkGSpLeRx7xujn-EXLk
+
+###
+GET http://localhost:8080/api/admin/coaches/train/2
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5Mjc1NTg3LCJleHAiOjE3ODkzNjE5ODd9.FkVsBh3ATJ_oS_AOahg4-49UKoHVAC_BKGGapgKIPh-R-d-Lu_9YrQ9N-OBd6NES
+
+
+###
+PUT http://localhost:8080/api/admin/coaches/11
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5Mjc1NTg3LCJleHAiOjE3ODkzNjE5ODd9.FkVsBh3ATJ_oS_AOahg4-49UKoHVAC_BKGGapgKIPh-R-d-Lu_9YrQ9N-OBd6NES
+
+{
+  "coachNumber": "A8"
+}
+
+
+###
+GET http://localhost:8080/api/admin/seats/coach/9/status?journeyDate=2026-09-15&from=SBC&to=NDLS
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5Mjc1NTg3LCJleHAiOjE3ODkzNjE5ODd9.FkVsBh3ATJ_oS_AOahg4-49UKoHVAC_BKGGapgKIPh-R-d-Lu_9YrQ9N-OBd6NES
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "usertest@railnexus.com",
+  "password": "Test@12345"
+}
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk3MzM0NjgsImV4cCI6MTc4OTgxOTg2OH0.5s1qbByEtHQkoeyosRVF1A-9VBP7a6bslCTMFnx59VhL3KnSYv-yl1FNDIUn5OTR
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "KJM",
+  "journeyDate": "2026-09-30",
+  "seatPreference": "NO_PREFERENCE",
+  "passengers": [
+    {
+      "seatId": 2,
+      "name": "Test User",
+      "age": 22,
+      "gender": "MALE"
+    }
+  ]
+}
+
+###
+PUT http://localhost:8080/api/bookings/RNE12DB5B8/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk2NDk0NjUsImV4cCI6MTc4OTczNTg2NX0.RDkoU0oGALZF29owW5UFndvOHHMDjE1QTNr6gWFmTVEtZXdkMq9rtMyNYaBJD4p8
+
+###
+POST http://localhost:8080/api/bookings/lock
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+Content-Type: application/json
+
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "KJM",
+  "journeyDate": "2026-09-30",
+  "classCode": "SL",
+  "seatPreference": "ANY",
+  "passengers": [
+    {
+      "name": "Senior Competition",
+      "age": 74,
+      "gender": "MALE",
+      "berthPreference": "LOWER"
+    }
+  ]
+}
+
+
+
+###
+PUT http://localhost:8080/api/bookings/RN19C1E1AD/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+
+
+###
+POST http://localhost:8080/api/bookings/lock
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+Content-Type: application/json
+
+{
+  "trainId": 3,
+  "fromStation": "SBC",
+  "toStation": "KJM",
+  "journeyDate": "2026-09-30",
+  "classCode": "SL",
+  "seatPreference": "ANY",
+  "passengers": [
+    {
+      "name": "Senior Competition",
+      "age": 74,
+      "gender": "MALE",
+      "berthPreference": "LOWER"
+    }
+  ]
+}
+
+###
+POST http://localhost:8080/api/bookings/lock
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+Content-Type: application/json
+
+{
+"trainId": 3,
+"fromStation": "SBC",
+"toStation": "KJM",
+"journeyDate": "2026-09-30",
+"classCode": "SL",
+"seatPreference": "ANY",
+"passengers": [
+{
+"name": "Regular Competition",
+"age": 45,
+"gender": "MALE",
+"berthPreference": "LOWER"
+}
+]
+}
+
+###
+GET http://localhost:8080/api/coaches/train/3
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5OTgwNTcsImV4cCI6MTc5MDA4NDQ1N30.eGtu6iSJn9NrFn3K8Rq0e6uvMfh2HY-G-pv2Bt9yuG5jRiYsa-AWIxvW6Tabe8RH
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@railnexus.com",
+  "password": "Admin@123"
+}
+
+###
+GET http://localhost:8080/api/admin/coaches/train/3
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5OTk4NTAzLCJleHAiOjE3OTAwODQ5MDN9.NarseIcX1-2sg-7iBgzZrc73agQx7Ar0Krvk0k27AgAI-VE6_HghJ9H7LAPv789z
+
+
+###
+GET http://localhost:8080/api/seats/coach/1/availability?journeyDate=2026-09-30&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5OTk4NTAzLCJleHAiOjE3OTAwODQ5MDN9.NarseIcX1-2sg-7iBgzZrc73agQx7Ar0Krvk0k27AgAI-VE6_HghJ9H7LAPv789z
+
+###
+GET http://localhost:8080/api/admin/coaches/train/3
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkByYWlsbmV4dXMuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzg5OTk4NTAzLCJleHAiOjE3OTAwODQ5MDN9.NarseIcX1-2sg-7iBgzZrc73agQx7Ar0Krvk0k27AgAI-VE6_HghJ9H7LAPv789z
+
+###
+GET http://localhost:8080/api/seats/coach/6/availability?journeyDate=2026-09-30&from=SBC&to=KJM
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "fromStation": "SBC",
+  "toStation": "KJM",
+  "journeyDate": "2026-09-30",
+  "classCode": "SL",
+  "seatPreference": "CONSECUTIVE",
+  "passengers": [
+    {
+      "name": "Consecutive Passenger 1",
+      "age": 30,
+      "gender": "MALE",
+      "berthPreference": null
+    },
+    {
+      "name": "Consecutive Passenger 2",
+      "age": 31,
+      "gender": "MALE",
+      "berthPreference": null
+    },
+    {
+      "name": "Consecutive Passenger 3",
+      "age": 32,
+      "gender": "MALE",
+      "berthPreference": null
+    }
+  ]
+}
+
+###
+PUT http://localhost:8080/api/bookings/RNB5B35331/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+
+
+###
+POST http://localhost:8080/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+Content-Type: application/json
+
+{
+  "trainId": 2,
+  "fromStation": "SBC",
+  "toStation": "KJM",
+  "journeyDate": "2026-09-30",
+  "classCode": "SL",
+  "seatPreference": "CONSECUTIVE",
+  "passengers": [
+    {
+      "name": "Regular Passenger",
+      "age": 45,
+      "gender": "MALE",
+      "berthPreference": "LOWER"
+    },
+    {
+      "name": "Senior Passenger",
+      "age": 74,
+      "gender": "MALE",
+      "berthPreference": "LOWER"
+    },
+    {
+      "name": "Regular Passenger 2",
+      "age": 58,
+      "gender": "MALE",
+      "berthPreference": "LOWER"
+    }
+  ]
+}
+
+###
+PUT http://localhost:8080/api/bookings/RN8972B91A/cancel
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODk5NjA0OTgsImV4cCI6MTc5MDA0Njg5OH0.hU-scoDfhYl473PmoWF5pv6bSOvZG71_-1lHLTG9ZbKthhlU0AXVxwmfQg38Ysk0
+
+
+###
+GET http://localhost:8080/api/bookings/my-bookings
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VydGVzdEByYWlsbmV4dXMuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3OTAyMTc5MzUsImV4cCI6MTc5MDMwNDMzNX0.f3jhedo5Y3fJrjExzvBOAggfyg7I9h9QB466n4roGNj0W94iBwAxV2-iVTM0vbVB

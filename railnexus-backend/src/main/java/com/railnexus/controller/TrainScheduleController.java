@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/train-schedules")
+@RequestMapping("/api/admin/train-schedules")
 public class TrainScheduleController {
 
     private final TrainScheduleService trainScheduleService;
@@ -34,5 +34,24 @@ public class TrainScheduleController {
             @PathVariable Long trainId
     ) {
         return trainScheduleService.getSchedulesByTrain(trainId);
+    }
+
+    @PutMapping("/{scheduleId}")
+    public TrainScheduleResponse updateSchedule(
+            @PathVariable Long scheduleId,
+            @Valid @RequestBody TrainScheduleRequest request
+    ) {
+        return trainScheduleService.updateSchedule(
+                scheduleId,
+                request
+        );
+    }
+
+    @DeleteMapping("/{scheduleId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSchedule(
+            @PathVariable Long scheduleId
+    ) {
+        trainScheduleService.deleteSchedule(scheduleId);
     }
 }

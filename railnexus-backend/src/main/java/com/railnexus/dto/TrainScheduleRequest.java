@@ -11,6 +11,5 @@ public record TrainScheduleRequest(
 
         @NotNull
         DayOfWeek dayOfWeek
-
 ) {
 }

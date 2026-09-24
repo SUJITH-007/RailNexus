@@ -1,88 +1,81 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/AdminBookings.css";
 
 function AdminBookings() {
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("All");
-
     const [selectedBooking, setSelectedBooking] = useState(null);
+    const [bookings, setBookings] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    const [bookings] = useState([
-        {
-            pnr: "RN102938",
-            trainNumber: "12627",
-            trainName: "RailNexus Express",
-            passenger: "Rahul Kumar",
-            from: "Bangalore",
-            to: "Hubli",
-            date: "21 Aug 2026",
-            className: "SL",
-            passengers: 2,
-            fare: "₹900",
-            status: "Confirmed",
-        },
-        {
-            pnr: "RN102939",
-            trainNumber: "16515",
-            trainName: "Deccan Star",
-            passenger: "Ananya Rao",
-            from: "Bangalore",
-            to: "Mangalore",
-            date: "21 Aug 2026",
-            className: "3A",
-            passengers: 1,
-            fare: "₹1,250",
-            status: "Confirmed",
-        },
-        {
-            pnr: "RN102940",
-            trainNumber: "12051",
-            trainName: "Karnataka Express",
-            passenger: "Vikram Shetty",
-            from: "Bangalore",
-            to: "Chennai",
-            date: "20 Aug 2026",
-            className: "2A",
-            passengers: 1,
-            fare: "₹1,800",
-            status: "Cancelled",
-        },
-        {
-            pnr: "RN102941",
-            trainNumber: "20646",
-            trainName: "Southern Explorer",
-            passenger: "Priya Nair",
-            from: "Mangalore",
-            to: "Bangalore",
-            date: "22 Aug 2026",
-            className: "CC",
-            passengers: 3,
-            fare: "₹1,650",
-            status: "Confirmed",
-        },
-        {
-            pnr: "RN102942",
-            trainNumber: "12845",
-            trainName: "Deccan Star",
-            passenger: "Arjun Menon",
-            from: "Bangalore",
-            to: "Hubli",
-            date: "23 Aug 2026",
-            className: "1A",
-            passengers: 1,
-            fare: "₹1,200",
-            status: "Pending",
-        },
-    ]);
+    useEffect(() => {
+        fetchBookings();
+    }, []);
+
+    async function fetchBookings() {
+        try {
+            setLoading(true);
+            setError("");
+
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(
+                "http://localhost:8080/api/admin/bookings",
+                {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    data?.error ||
+                    "Failed to load bookings."
+                );
+            }
+
+            setBookings(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    function formatDate(date) {
+        if (!date) {
+            return "-";
+        }
+
+        return new Date(`${date}T00:00:00`).toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+            }
+        );
+    }
+
+    function formatFare(fare) {
+        return `₹${Number(fare || 0).toLocaleString("en-IN")}`;
+    }
 
     const filteredBookings = bookings.filter((booking) => {
         const searchValue = search.toLowerCase();
 
         const matchesSearch =
-            booking.pnr.toLowerCase().includes(searchValue) ||
-            booking.trainNumber.toLowerCase().includes(searchValue) ||
-            booking.trainName.toLowerCase().includes(searchValue) ||
-            booking.passenger.toLowerCase().includes(searchValue);
+            booking.pnr?.toLowerCase().includes(searchValue) ||
+            booking.trainNumber?.toLowerCase().includes(searchValue) ||
+            booking.trainName?.toLowerCase().includes(searchValue) ||
+            booking.passengerName?.toLowerCase().includes(searchValue) ||
+            booking.passengerEmail?.toLowerCase().includes(searchValue);
 
         const matchesStatus =
             statusFilter === "All" ||
@@ -90,6 +83,67 @@ function AdminBookings() {
 
         return matchesSearch && matchesStatus;
     });
+
+    if (loading) {
+        return (
+            <div className="admin-page">
+                <div className="admin-page-header">
+                    <div>
+                        <p className="admin-page-label">
+                            MANAGEMENT
+                        </p>
+
+                        <h1>Bookings</h1>
+
+                        <p>
+                            View and manage passenger bookings across RailNexus.
+                        </p>
+                    </div>
+                </div>
+
+                <section className="admin-card">
+                    <div className="admin-empty-state">
+                        <h3>Loading bookings</h3>
+                        <p>Fetching booking data from RailNexus.</p>
+                    </div>
+                </section>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="admin-page">
+                <div className="admin-page-header">
+                    <div>
+                        <p className="admin-page-label">
+                            MANAGEMENT
+                        </p>
+
+                        <h1>Bookings</h1>
+
+                        <p>
+                            View and manage passenger bookings across RailNexus.
+                        </p>
+                    </div>
+                </div>
+
+                <section className="admin-card">
+                    <div className="admin-empty-state">
+                        <h3>Unable to load bookings</h3>
+                        <p>{error}</p>
+                        <button
+                            type="button"
+                            className="admin-view-button"
+                            onClick={fetchBookings}
+                        >
+                            Retry
+                        </button>
+                    </div>
+                </section>
+            </div>
+        );
+    }
 
     return (
         <div className="admin-page">
@@ -110,7 +164,6 @@ function AdminBookings() {
 
             </div>
 
-
             <section className="admin-card">
 
                 <div className="admin-bookings-toolbar">
@@ -122,7 +175,6 @@ function AdminBookings() {
                             {filteredBookings.length} bookings found
                         </p>
                     </div>
-
 
                     <div className="admin-booking-filters">
 
@@ -147,15 +199,11 @@ function AdminBookings() {
                                 All Status
                             </option>
 
-                            <option value="Confirmed">
+                            <option value="CONFIRMED">
                                 Confirmed
                             </option>
 
-                            <option value="Pending">
-                                Pending
-                            </option>
-
-                            <option value="Cancelled">
+                            <option value="CANCELLED">
                                 Cancelled
                             </option>
                         </select>
@@ -163,7 +211,6 @@ function AdminBookings() {
                     </div>
 
                 </div>
-
 
                 <div className="admin-table-wrapper">
 
@@ -182,7 +229,6 @@ function AdminBookings() {
                             </tr>
                         </thead>
 
-
                         <tbody>
 
                             {filteredBookings.map((booking) => (
@@ -195,20 +241,18 @@ function AdminBookings() {
                                         </strong>
                                     </td>
 
-
                                     <td>
                                         <strong className="admin-passenger-name">
-                                            {booking.passenger}
+                                            {booking.passengerName}
                                         </strong>
 
                                         <span className="admin-passenger-count">
-                                            {booking.passengers} passenger
-                                            {booking.passengers !== 1
+                                            {booking.passengerCount} passenger
+                                            {booking.passengerCount !== 1
                                                 ? "s"
                                                 : ""}
                                         </span>
                                     </td>
-
 
                                     <td>
                                         <strong>
@@ -220,41 +264,37 @@ function AdminBookings() {
                                         </span>
                                     </td>
 
-
                                     <td>
                                         <div className="admin-booking-route">
 
                                             <strong>
-                                                {booking.from}
+                                                {booking.fromStation}
                                             </strong>
 
                                             <span>→</span>
 
                                             <strong>
-                                                {booking.to}
+                                                {booking.toStation}
                                             </strong>
 
                                         </div>
 
                                         <span className="admin-sub-text">
-                                            {booking.date}
+                                            {formatDate(booking.journeyDate)}
                                         </span>
                                     </td>
-
 
                                     <td>
                                         <span className="admin-class-badge">
-                                            {booking.className}
+                                            {booking.classCode || "-"}
                                         </span>
                                     </td>
 
-
                                     <td>
                                         <strong>
-                                            {booking.fare}
+                                            {formatFare(booking.totalFare)}
                                         </strong>
                                     </td>
-
 
                                     <td>
                                         <span
@@ -264,17 +304,16 @@ function AdminBookings() {
                                         </span>
                                     </td>
 
-
                                     <td>
-
                                         <button
                                             className="admin-view-button"
                                             type="button"
-                                            onClick={() => setSelectedBooking(booking)}
+                                            onClick={() =>
+                                                setSelectedBooking(booking)
+                                            }
                                         >
                                             View
                                         </button>
-
                                     </td>
 
                                 </tr>
@@ -284,7 +323,6 @@ function AdminBookings() {
                         </tbody>
 
                     </table>
-
 
                     {filteredBookings.length === 0 && (
 
@@ -305,208 +343,243 @@ function AdminBookings() {
                 </div>
 
             </section>
+
             {selectedBooking && (
 
-    <div
-        className="admin-modal-overlay"
-        onClick={() => setSelectedBooking(null)}
-    >
-
-        <div
-            className="admin-booking-detail-modal"
-            onClick={(event) =>
-                event.stopPropagation()
-            }
-        >
-
-            <div className="admin-modal-header">
-
-                <div>
-
-                    <p className="admin-page-label">
-                        BOOKING DETAILS
-                    </p>
-
-                    <h2>
-                        Booking Information
-                    </h2>
-
-                    <p>
-                        Complete details of this passenger booking.
-                    </p>
-
-                </div>
-
-                <button
-                    type="button"
-                    className="admin-modal-close"
-                    onClick={() =>
-                        setSelectedBooking(null)
-                    }
+                <div
+                    className="admin-modal-overlay"
+                    onClick={() => setSelectedBooking(null)}
                 >
-                    ×
-                </button>
 
-            </div>
+                    <div
+                        className="admin-booking-detail-modal"
+                        onClick={(event) =>
+                            event.stopPropagation()
+                        }
+                    >
 
+                        <div className="admin-modal-header">
 
-            <div className="admin-booking-detail-content">
+                            <div>
 
-                <div className="admin-detail-pnr">
+                                <p className="admin-page-label">
+                                    BOOKING DETAILS
+                                </p>
 
-                    <span>
-                        PNR
-                    </span>
+                                <h2>
+                                    Booking Information
+                                </h2>
 
-                    <strong>
-                        {selectedBooking.pnr}
-                    </strong>
+                                <p>
+                                    Complete details of this passenger booking.
+                                </p>
 
-                </div>
+                            </div>
 
+                            <button
+                                type="button"
+                                className="admin-modal-close"
+                                onClick={() =>
+                                    setSelectedBooking(null)
+                                }
+                            >
+                                ×
+                            </button>
 
-                <div className="admin-detail-section">
-
-                    <h3>
-                        Passenger
-                    </h3>
-
-                    <div className="admin-detail-grid">
-
-                        <div>
-                            <span>Name</span>
-                            <strong>
-                                {selectedBooking.passenger}
-                            </strong>
                         </div>
 
-                        <div>
-                            <span>Passengers</span>
-                            <strong>
-                                {selectedBooking.passengers}
-                            </strong>
+                        <div className="admin-booking-detail-content">
+
+                            <div className="admin-detail-pnr">
+
+                                <span>
+                                    PNR
+                                </span>
+
+                                <strong>
+                                    {selectedBooking.pnr}
+                                </strong>
+
+                            </div>
+
+                            <div className="admin-detail-section">
+
+                                <h3>
+                                    Passenger
+                                </h3>
+
+                                <div className="admin-detail-grid">
+
+                                    <div>
+                                        <span>Name</span>
+                                        <strong>
+                                            {selectedBooking.passengerName}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Email</span>
+                                        <strong>
+                                            {selectedBooking.passengerEmail}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Passengers</span>
+                                        <strong>
+                                            {selectedBooking.passengerCount}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div className="admin-detail-section">
+
+                                <h3>
+                                    Train
+                                </h3>
+
+                                <div className="admin-detail-grid">
+
+                                    <div>
+                                        <span>Train Name</span>
+                                        <strong>
+                                            {selectedBooking.trainName}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Train Number</span>
+                                        <strong>
+                                            {selectedBooking.trainNumber}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div className="admin-detail-section">
+
+                                <h3>
+                                    Journey
+                                </h3>
+
+                                <div className="admin-detail-grid">
+
+                                    <div>
+                                        <span>From</span>
+                                        <strong>
+                                            {selectedBooking.fromStation}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>To</span>
+                                        <strong>
+                                            {selectedBooking.toStation}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Journey Date</span>
+                                        <strong>
+                                            {formatDate(
+                                                selectedBooking.journeyDate
+                                            )}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div className="admin-detail-section">
+
+                                <h3>
+                                    Seats
+                                </h3>
+
+                                <div className="admin-detail-grid">
+
+                                    {selectedBooking.seats?.length > 0 ? (
+                                        selectedBooking.seats.map((seat) => (
+                                            <div key={seat.seatId}>
+                                                <span>
+                                                    {seat.coachNumber} / Seat {seat.seatNumber}
+                                                </span>
+
+                                                <strong>
+                                                    {seat.passengerName}
+                                                </strong>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div>
+                                            <span>Seats</span>
+                                            <strong>-</strong>
+                                        </div>
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                            <div className="admin-detail-summary">
+
+                                <div>
+                                    <span>Class</span>
+
+                                    <strong className="admin-class-badge">
+                                        {selectedBooking.classCode || "-"}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span>Fare</span>
+
+                                    <strong>
+                                        {formatFare(
+                                            selectedBooking.totalFare
+                                        )}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span>Status</span>
+
+                                    <strong
+                                        className={`admin-booking-status ${selectedBooking.status.toLowerCase()}`}
+                                    >
+                                        {selectedBooking.status}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div className="admin-detail-footer">
+
+                            <button
+                                type="button"
+                                className="admin-cancel-button"
+                                onClick={() =>
+                                    setSelectedBooking(null)
+                                }
+                            >
+                                Close
+                            </button>
+
                         </div>
 
                     </div>
 
                 </div>
 
-
-                <div className="admin-detail-section">
-
-                    <h3>
-                        Train
-                    </h3>
-
-                    <div className="admin-detail-grid">
-
-                        <div>
-                            <span>Train Name</span>
-                            <strong>
-                                {selectedBooking.trainName}
-                            </strong>
-                        </div>
-
-                        <div>
-                            <span>Train Number</span>
-                            <strong>
-                                {selectedBooking.trainNumber}
-                            </strong>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div className="admin-detail-section">
-
-                    <h3>
-                        Journey
-                    </h3>
-
-                    <div className="admin-detail-grid">
-
-                        <div>
-                            <span>From</span>
-                            <strong>
-                                {selectedBooking.from}
-                            </strong>
-                        </div>
-
-                        <div>
-                            <span>To</span>
-                            <strong>
-                                {selectedBooking.to}
-                            </strong>
-                        </div>
-
-                        <div>
-                            <span>Journey Date</span>
-                            <strong>
-                                {selectedBooking.date}
-                            </strong>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div className="admin-detail-summary">
-
-                    <div>
-                        <span>Class</span>
-
-                        <strong className="admin-class-badge">
-                            {selectedBooking.className}
-                        </strong>
-                    </div>
-
-
-                    <div>
-                        <span>Fare</span>
-
-                        <strong>
-                            {selectedBooking.fare}
-                        </strong>
-                    </div>
-
-
-                    <div>
-                        <span>Status</span>
-
-                        <strong
-                            className={`admin-booking-status ${selectedBooking.status.toLowerCase()}`}
-                        >
-                            {selectedBooking.status}
-                        </strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div className="admin-detail-footer">
-
-                <button
-                    type="button"
-                    className="admin-cancel-button"
-                    onClick={() =>
-                        setSelectedBooking(null)
-                    }
-                >
-                    Close
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-)}
+            )}
 
         </div>
     );

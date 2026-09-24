@@ -1,42 +1,82 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/PassengerBookings.css";
 
 function PassengerBookings() {
-    const upcomingBookings = [
-        {
-            id: 1,
-            pnr: "RN397881321",
-            trainNumber: "12601",
-            trainName: "RailNexus Express",
-            from: "Bangalore",
-            to: "Hubli",
-            date: "21 Aug 2026",
-            departure: "06:30 AM",
-            arrival: "01:45 PM",
-            travelClass: "SL",
-            passengers: 1,
-            fare: "₹450",
-            status: "CONFIRMED"
-        }
-    ];
 
-    const previousBookings = [
-        {
-            id: 2,
-            pnr: "RN284761920",
-            trainNumber: "12845",
-            trainName: "Deccan Star",
-            from: "Bangalore",
-            to: "Hubli",
-            date: "10 Aug 2026",
-            departure: "08:15 AM",
-            arrival: "03:30 PM",
-            travelClass: "3A",
-            passengers: 2,
-            fare: "₹1,240",
-            status: "COMPLETED"
-        }
-    ];
+    const [bookings, setBookings] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchBookings = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:8080/api/bookings/my-bookings",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("token")}`
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch bookings");
+                }
+
+                const data = await response.json();
+                setBookings(data);
+            } catch (error) {
+                console.error("Failed to fetch bookings:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchBookings();
+    }, []);
+
+    const today = new Date().toISOString().split("T")[0];
+
+    const upcomingBookings = bookings
+        .filter(
+            (booking) =>
+                booking.status === "CONFIRMED" &&
+                booking.journeyDate >= today
+        )
+        .map((booking) => ({
+            id: booking.id,
+            pnr: booking.pnr,
+            trainNumber: booking.trainNumber,
+            trainName: booking.trainName,
+            from: booking.fromStation,
+            to: booking.toStation,
+            date: booking.journeyDate,
+            departure: "—",
+            arrival: "—",
+            travelClass: booking.classCode,
+            passengers: booking.passengerCount,
+            fare: `₹${booking.totalFare}`,
+            status: booking.status
+        }));
+
+    const previousBookings = bookings
+        .filter(
+            (booking) =>
+                booking.status !== "CONFIRMED" ||
+                booking.journeyDate < today
+        )
+        .map((booking) => ({
+            id: booking.id,
+            pnr: booking.pnr,
+            trainName: booking.trainName,
+            from: booking.fromStation,
+            to: booking.toStation,
+            date: booking.journeyDate,
+            travelClass: booking.classCode,
+            passengers: booking.passengerCount,
+            fare: `₹${booking.totalFare}`,
+            status: booking.status
+        }));
 
     return (
         <div className="passenger-bookings-page">
@@ -240,7 +280,7 @@ function PassengerBookings() {
                                     <div className="passenger-booking-actions">
 
                                         <Link
-                                            to={`/confirmation/${booking.trainNumber}`}
+                                            to={`/confirmation/${booking.pnr}`}
                                             className="passenger-view-ticket-button"
                                         >
                                             View Ticket

@@ -5,11 +5,8 @@ import java.time.DayOfWeek;
 public record TrainScheduleResponse(
 
         Long id,
-
         Long trainId,
         String trainNumber,
-
         DayOfWeek dayOfWeek
-
 ) {
 }

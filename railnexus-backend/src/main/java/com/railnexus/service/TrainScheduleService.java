@@ -7,7 +7,18 @@ import java.util.List;
 
 public interface TrainScheduleService {
 
-    TrainScheduleResponse createSchedule(TrainScheduleRequest request);
+    TrainScheduleResponse createSchedule(
+            TrainScheduleRequest request
+    );
 
-    List<TrainScheduleResponse> getSchedulesByTrain(Long trainId);
+    List<TrainScheduleResponse> getSchedulesByTrain(
+            Long trainId
+    );
+
+    TrainScheduleResponse updateSchedule(
+            Long scheduleId,
+            TrainScheduleRequest request
+    );
+
+    void deleteSchedule(Long scheduleId);
 }

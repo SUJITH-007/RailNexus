@@ -2,6 +2,7 @@ package com.railnexus.controller;
 
 import com.railnexus.dto.TrainRequest;
 import com.railnexus.dto.TrainResponse;
+import com.railnexus.dto.TrainSearchResponse;
 import com.railnexus.service.TrainService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -53,5 +54,14 @@ public class TrainController {
             @PathVariable String number
     ) {
         trainService.deleteTrain(number);
+    }
+
+    @GetMapping("/search")
+    public List<TrainSearchResponse> searchTrains(
+            @RequestParam String from,
+            @RequestParam String to,
+            @RequestParam java.time.LocalDate date
+    ) {
+        return trainService.searchTrains(from, to, date);
     }
 }

@@ -1,6 +1,7 @@
 package com.railnexus.dto;
 
 import java.time.LocalTime;
+import java.util.List;
 
 public record TrainSearchResponse(
 
@@ -19,7 +20,9 @@ public record TrainSearchResponse(
         String toStationName,
         LocalTime arrivalTime,
 
-        Double distance
+        Double distance,
+
+        List<String> classes
 
 ) {
 }

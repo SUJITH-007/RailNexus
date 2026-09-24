@@ -19,6 +19,7 @@ import AdminProfile from "./pages/admin/AdminProfile";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminRoute from "./pages/admin/AdminRoute";
 import ProtectedRoute from "./pages/auth/ProtectedRoute";
+import AdminStations from "./pages/admin/AdminStations";
 
 function App() {
   return (
@@ -60,7 +61,7 @@ function App() {
             }
           />
           <Route
-            path="/confirmation/:trainNumber"
+            path="/confirmation/:pnr"
             element={
               <ProtectedRoute>
                 <BookingConfirmation />
@@ -103,6 +104,17 @@ function App() {
               </AdminRoute>
             }
           />
+          <Route
+            path="/admin/stations"
+            element={
+              <AdminRoute>
+                <AdminLayout>
+                  <AdminStations />
+                </AdminLayout>
+              </AdminRoute>
+            }
+          />
+
           <Route
             path="/admin/bookings"
             element={

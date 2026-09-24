@@ -1,82 +1,137 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../styles/AdminUsers.css";
 
 function AdminUsers() {
     const [search, setSearch] = useState("");
     const [statusFilter, setStatusFilter] = useState("All");
-
     const [selectedUser, setSelectedUser] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [updatingUserId, setUpdatingUserId] = useState(null);
+    const [error, setError] = useState("");
 
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            name: "Rahul Kumar",
-            email: "rahul.kumar@gmail.com",
-            phone: "9876543210",
-            registered: "12 Jan 2026",
-            bookings: 8,
-            status: "Active",
-        },
-        {
-            id: 2,
-            name: "Ananya Rao",
-            email: "ananya.rao@gmail.com",
-            phone: "9876543211",
-            registered: "18 Feb 2026",
-            bookings: 5,
-            status: "Active",
-        },
-        {
-            id: 3,
-            name: "Vikram Shetty",
-            email: "vikram.shetty@gmail.com",
-            phone: "9876543212",
-            registered: "03 Mar 2026",
-            bookings: 12,
-            status: "Blocked",
-        },
-        {
-            id: 4,
-            name: "Priya Nair",
-            email: "priya.nair@gmail.com",
-            phone: "9876543213",
-            registered: "21 Mar 2026",
-            bookings: 4,
-            status: "Active",
-        },
-        {
-            id: 5,
-            name: "Arjun Menon",
-            email: "arjun.menon@gmail.com",
-            phone: "9876543214",
-            registered: "08 Apr 2026",
-            bookings: 2,
-            status: "Active",
-        },
-        {
-            id: 6,
-            name: "Kiran Rao",
-            email: "kiran.rao@gmail.com",
-            phone: "9876543215",
-            registered: "15 Apr 2026",
-            bookings: 7,
-            status: "Blocked",
-        },
-    ]);
+    useEffect(() => {
+        fetchUsers();
+    }, []);
 
-    function handleToggleBlock(userId) {
-        setUsers((currentUsers) =>
-            currentUsers.map((user) =>
-                user.id === userId
-                    ? {
-                        ...user,
-                        status:
-                            user.status === "Active"
-                                ? "Blocked"
-                                : "Active",
-                    }
-                    : user
-            )
+    async function fetchUsers() {
+        try {
+            setLoading(true);
+            setError("");
+
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(
+                "http://localhost:8080/api/admin/users",
+                {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    data?.error ||
+                    "Failed to load users."
+                );
+            }
+
+            setUsers(data);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function handleToggleBlock(user) {
+        try {
+            setUpdatingUserId(user.id);
+            setError("");
+
+            const nextStatus =
+                user.status === "ACTIVE"
+                    ? "BLOCKED"
+                    : "ACTIVE";
+
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(
+                `http://localhost:8080/api/admin/users/${user.id}/status?status=${nextStatus}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    data?.error ||
+                    "Failed to update user status."
+                );
+            }
+
+            setUsers((currentUsers) =>
+                currentUsers.map((currentUser) =>
+                    currentUser.id === data.id
+                        ? data
+                        : currentUser
+                )
+            );
+
+            setSelectedUser((currentSelectedUser) =>
+                currentSelectedUser?.id === data.id
+                    ? data
+                    : currentSelectedUser
+            );
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setUpdatingUserId(null);
+        }
+    }
+
+    function formatDate(dateTime) {
+        if (!dateTime) {
+            return "-";
+        }
+
+        return new Date(dateTime).toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+            }
+        );
+    }
+
+    function formatDateTime(dateTime) {
+        if (!dateTime) {
+            return "-";
+        }
+
+        return new Date(dateTime).toLocaleString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+            }
         );
     }
 
@@ -84,9 +139,10 @@ function AdminUsers() {
         const searchValue = search.toLowerCase();
 
         const matchesSearch =
-            user.name.toLowerCase().includes(searchValue) ||
-            user.email.toLowerCase().includes(searchValue) ||
-            user.phone.includes(searchValue);
+            user.name?.toLowerCase().includes(searchValue) ||
+            user.email?.toLowerCase().includes(searchValue) ||
+            user.phone?.includes(searchValue) ||
+            user.role?.toLowerCase().includes(searchValue);
 
         const matchesStatus =
             statusFilter === "All" ||
@@ -114,7 +170,6 @@ function AdminUsers() {
 
             </div>
 
-
             <section className="admin-card">
 
                 <div className="admin-users-toolbar">
@@ -126,7 +181,6 @@ function AdminUsers() {
                             {filteredUsers.length} users found
                         </p>
                     </div>
-
 
                     <div className="admin-user-filters">
 
@@ -151,11 +205,11 @@ function AdminUsers() {
                                 All Status
                             </option>
 
-                            <option value="Active">
+                            <option value="ACTIVE">
                                 Active
                             </option>
 
-                            <option value="Blocked">
+                            <option value="BLOCKED">
                                 Blocked
                             </option>
                         </select>
@@ -164,6 +218,11 @@ function AdminUsers() {
 
                 </div>
 
+                {error && (
+                    <div className="admin-form-error">
+                        {error}
+                    </div>
+                )}
 
                 <div className="admin-table-wrapper">
 
@@ -180,122 +239,145 @@ function AdminUsers() {
                             </tr>
                         </thead>
 
-
                         <tbody>
 
-                            {filteredUsers.map((user) => (
+                            {loading ? (
 
-                                <tr key={user.id}>
-
-                                    <td>
-                                        <div className="admin-user-info">
-
-                                            <div className="admin-user-avatar">
-                                                {user.name
-                                                    .charAt(0)
-                                                    .toUpperCase()}
-                                            </div>
-
-                                            <div>
-                                                <strong>
-                                                    {user.name}
-                                                </strong>
-
-                                                <span>
-                                                    {user.email}
-                                                </span>
-                                            </div>
-
-                                        </div>
+                                <tr>
+                                    <td colSpan="6">
+                                        Loading users...
                                     </td>
-
-
-                                    <td>
-                                        {user.phone}
-                                    </td>
-
-
-                                    <td>
-                                        {user.registered}
-                                    </td>
-
-
-                                    <td>
-                                        <strong>
-                                            {user.bookings}
-                                        </strong>
-                                    </td>
-
-
-                                    <td>
-
-                                        <span
-                                            className={
-                                                user.status === "Active"
-                                                    ? "admin-user-status active"
-                                                    : "admin-user-status blocked"
-                                            }
-                                        >
-                                            {user.status}
-                                        </span>
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <div className="admin-user-actions">
-
-                                            <button
-                                                type="button"
-                                                className="admin-view-button"
-                                                onClick={() => setSelectedUser(user)}
-                                            >
-                                                View
-                                            </button>
-
-                                            <button
-                                                type="button"
-                                                className={
-                                                    user.status === "Active"
-                                                        ? "admin-block-button"
-                                                        : "admin-unblock-button"
-                                                }
-                                                onClick={() => handleToggleBlock(user.id)}
-                                            >
-                                                {user.status === "Active"
-                                                    ? "Block"
-                                                    : "Unblock"}
-                                            </button>
-
-                                        </div>
-
-                                    </td>
-
                                 </tr>
 
-                            ))}
+                            ) : filteredUsers.length === 0 ? (
+
+                                <tr>
+                                    <td colSpan="6">
+                                        No users found.
+                                    </td>
+                                </tr>
+
+                            ) : (
+
+                                filteredUsers.map((user) => (
+
+                                    <tr key={user.id}>
+
+                                        <td>
+
+                                            <div className="admin-user-info">
+
+                                                <div className="admin-user-avatar">
+                                                    {user.name
+                                                        ?.charAt(0)
+                                                        .toUpperCase()}
+                                                </div>
+
+                                                <div>
+
+                                                    <strong>
+                                                        {user.name}
+                                                    </strong>
+
+                                                    <span>
+                                                        {user.email}
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            {user.phone || "-"}
+                                        </td>
+
+                                        <td>
+                                            {formatDate(user.createdAt)}
+                                        </td>
+
+                                        <td>
+                                            {user.totalBookings ?? 0}
+                                        </td>
+
+                                        <td>
+
+                                            <span
+                                                className={
+                                                    user.status === "ACTIVE"
+                                                        ? "admin-user-status active"
+                                                        : "admin-user-status blocked"
+                                                }
+                                            >
+                                                {user.status}
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+
+                                            <div className="admin-user-actions">
+
+                                                <button
+                                                    type="button"
+                                                    className="admin-view-button"
+                                                    onClick={() =>
+                                                        setSelectedUser(user)
+                                                    }
+                                                >
+                                                    View
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    className={
+                                                        user.status === "ACTIVE"
+                                                            ? "admin-block-button"
+                                                            : "admin-unblock-button"
+                                                    }
+                                                    disabled={
+                                                        updatingUserId === user.id
+                                                    }
+                                                    onClick={() =>
+                                                        handleToggleBlock(user)
+                                                    }
+                                                >
+                                                    {updatingUserId === user.id
+                                                        ? "Updating..."
+                                                        : user.status === "ACTIVE"
+                                                            ? "Block"
+                                                            : "Unblock"}
+                                                </button>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                ))
+
+                            )}
 
                         </tbody>
 
                     </table>
 
+                    {!loading &&
+                        filteredUsers.length === 0 && (
+                            <div className="admin-empty-state">
 
-                    {filteredUsers.length === 0 && (
+                                <h3>
+                                    No users found
+                                </h3>
 
-                        <div className="admin-empty-state">
+                                <p>
+                                    Try changing your search or filter.
+                                </p>
 
-                            <h3>
-                                No users found
-                            </h3>
-
-                            <p>
-                                Try changing your search or filter.
-                            </p>
-
-                        </div>
-
-                    )}
+                            </div>
+                        )}
 
                 </div>
 
@@ -324,11 +406,11 @@ function AdminUsers() {
                                 </p>
 
                                 <h2>
-                                    Passenger Account
+                                    User Account
                                 </h2>
 
                                 <p>
-                                    View passenger account information.
+                                    View user account information.
                                 </p>
 
                             </div>
@@ -345,14 +427,13 @@ function AdminUsers() {
 
                         </div>
 
-
                         <div className="admin-user-detail-content">
 
                             <div className="admin-user-detail-profile">
 
                                 <div className="admin-user-detail-avatar">
                                     {selectedUser.name
-                                        .charAt(0)
+                                        ?.charAt(0)
                                         .toUpperCase()}
                                 </div>
 
@@ -364,7 +445,7 @@ function AdminUsers() {
 
                                     <span
                                         className={
-                                            selectedUser.status === "Active"
+                                            selectedUser.status === "ACTIVE"
                                                 ? "admin-user-status active"
                                                 : "admin-user-status blocked"
                                         }
@@ -376,7 +457,6 @@ function AdminUsers() {
 
                             </div>
 
-
                             <div className="admin-detail-section">
 
                                 <h3>
@@ -386,44 +466,60 @@ function AdminUsers() {
                                 <div className="admin-detail-grid">
 
                                     <div>
-                                        <span>Full Name</span>
+                                        <span>
+                                            Full Name
+                                        </span>
 
                                         <strong>
                                             {selectedUser.name}
                                         </strong>
                                     </div>
 
-
                                     <div>
-                                        <span>Email Address</span>
+                                        <span>
+                                            Email Address
+                                        </span>
 
                                         <strong>
                                             {selectedUser.email}
                                         </strong>
                                     </div>
 
-
                                     <div>
-                                        <span>Phone Number</span>
+                                        <span>
+                                            Phone Number
+                                        </span>
 
                                         <strong>
-                                            {selectedUser.phone}
+                                            {selectedUser.phone || "-"}
                                         </strong>
                                     </div>
 
-
                                     <div>
-                                        <span>Registered</span>
+                                        <span>
+                                            Role
+                                        </span>
 
                                         <strong>
-                                            {selectedUser.registered}
+                                            {selectedUser.role}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>
+                                            Registered
+                                        </span>
+
+                                        <strong>
+                                            {formatDateTime(
+                                                selectedUser.createdAt
+                                            )}
                                         </strong>
                                     </div>
 
                                 </div>
 
                             </div>
-
 
                             <div className="admin-user-detail-stat">
 
@@ -434,7 +530,7 @@ function AdminUsers() {
                                     </span>
 
                                     <strong>
-                                        {selectedUser.bookings}
+                                        {selectedUser.totalBookings ?? 0}
                                     </strong>
 
                                 </div>
@@ -454,7 +550,6 @@ function AdminUsers() {
                             </div>
 
                         </div>
-
 
                         <div className="admin-detail-footer">
 

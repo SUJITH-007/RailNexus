@@ -49,6 +49,17 @@ function AdminLayout({ children }) {
                     </Link>
 
                     <Link
+                        to="/admin/stations"
+                        className={
+                            location.pathname.startsWith("/admin/stations")
+                                ? "admin-nav-link active"
+                                : "admin-nav-link"
+                        }
+                    >
+                        Stations
+                    </Link>
+
+                    <Link
                         to="/admin/bookings"
                         className={
                             location.pathname.startsWith("/admin/bookings")

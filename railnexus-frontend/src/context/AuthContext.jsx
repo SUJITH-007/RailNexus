@@ -2,54 +2,67 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext();
 
+function getStoredToken() {
+    return localStorage.getItem("token");
+}
+
+function getRoleFromToken(token) {
+    if (!token) {
+        return null;
+    }
+
+    try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        return payload.role || null;
+    } catch (error) {
+        return null;
+    }
+}
+
 export function AuthProvider({ children }) {
+    const [token, setToken] = useState(getStoredToken);
 
-    const [isLoggedIn, setIsLoggedIn] = useState(
-        localStorage.getItem("isLoggedIn") === "true"
+    const [userRole, setUserRole] = useState(() =>
+        getRoleFromToken(getStoredToken())
     );
 
-    const [userRole, setUserRole] = useState(
-        localStorage.getItem("userRole")
-    );
+    const isLoggedIn = !!token;
 
+    function login(loginResponse) {
+        const receivedToken = loginResponse.token;
 
-    function login() {
+        localStorage.setItem("token", receivedToken);
 
-        setIsLoggedIn(true);
-        setUserRole("USER");
+        if (loginResponse.tokenType) {
+            localStorage.setItem("tokenType", loginResponse.tokenType);
+        }
 
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userRole", "USER");
+        const role = getRoleFromToken(receivedToken);
+
+        if (role) {
+            localStorage.setItem("userRole", role);
+        }
+
+        setToken(receivedToken);
+        setUserRole(role);
     }
-
-
-    function adminLogin() {
-
-        setIsLoggedIn(true);
-        setUserRole("ADMIN");
-
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userRole", "ADMIN");
-    }
-
 
     function logout() {
-
-        setIsLoggedIn(false);
-        setUserRole(null);
-
-        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("token");
+        localStorage.removeItem("tokenType");
         localStorage.removeItem("userRole");
-    }
 
+        setToken(null);
+        setUserRole(null);
+    }
 
     return (
         <AuthContext.Provider
             value={{
                 isLoggedIn,
+                token,
                 userRole,
                 login,
-                adminLogin,
                 logout,
             }}
         >
@@ -57,7 +70,6 @@ export function AuthProvider({ children }) {
         </AuthContext.Provider>
     );
 }
-
 
 export function useAuth() {
     return useContext(AuthContext);

@@ -1,23 +1,127 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "../../styles/Home.css";
 
 function Home() {
     const navigate = useNavigate();
+    const { token } = useAuth();
 
     const [from, setFrom] = useState("");
     const [to, setTo] = useState("");
     const [journeyDate, setJourneyDate] = useState("");
     const [travelClass, setTravelClass] = useState("all");
 
-    function handleSearch() {
-        if (!from.trim() || !to.trim()) {
+    const [fromStation, setFromStation] = useState(null);
+    const [toStation, setToStation] = useState(null);
+
+    const [fromSuggestions, setFromSuggestions] = useState([]);
+    const [toSuggestions, setToSuggestions] = useState([]);
+
+    async function searchStations(query) {
+        if (!query.trim()) {
+            return [];
+        }
+
+        try {
+            const response = await fetch(
+                `http://localhost:8080/api/stations/search?query=${encodeURIComponent(
+                    query.trim()
+                )}`,
+                {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Failed to search stations.");
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error("Station search error:", error);
+            return [];
+        }
+    }
+
+    async function handleFromChange(event) {
+        const value = event.target.value;
+
+        setFrom(value);
+        setFromStation(null);
+
+        if (value.trim().length < 2) {
+            setFromSuggestions([]);
             return;
         }
 
-        navigate(
-            `/trains?from=${encodeURIComponent(from.trim())}&to=${encodeURIComponent(to.trim())}&date=${journeyDate}&class=${travelClass}`
-        );
+        const stations = await searchStations(value);
+
+        setFromSuggestions(stations);
+    }
+
+    async function handleToChange(event) {
+        const value = event.target.value;
+
+        setTo(value);
+        setToStation(null);
+
+        if (value.trim().length < 2) {
+            setToSuggestions([]);
+            return;
+        }
+
+        const stations = await searchStations(value);
+
+        setToSuggestions(stations);
+    }
+
+    function selectFromStation(station) {
+        setFrom(station.name);
+        setFromStation(station);
+        setFromSuggestions([]);
+    }
+
+    function selectToStation(station) {
+        setTo(station.name);
+        setToStation(station);
+        setToSuggestions([]);
+    }
+
+    function handleSearch() {
+        console.log("SEARCH BUTTON CLICKED");
+
+        if (!fromStation || !toStation) {
+            console.log(
+                "Search stopped: Please select both stations from suggestions."
+            );
+            return;
+        }
+
+        if (!journeyDate) {
+            console.log("Search stopped: Journey date is required.");
+            return;
+        }
+
+        if (fromStation.code === toStation.code) {
+            console.log(
+                "Search stopped: Departure and arrival stations cannot be the same."
+            );
+            return;
+        }
+
+        const searchUrl =
+            `/trains?from=${encodeURIComponent(fromStation.code)}` +
+            `&to=${encodeURIComponent(toStation.code)}` +
+            `&date=${encodeURIComponent(journeyDate)}` +
+            `&class=${encodeURIComponent(travelClass)}`;
+
+        console.log("Navigating to:", searchUrl);
+
+        navigate(searchUrl);
     }
     return (
         <div className="home-page">
@@ -47,33 +151,124 @@ function Home() {
                     <div className="home-search-fields">
 
                         <div className="home-search-input-group">
-                            <label htmlFor="from">From</label>
-                            <input
-                                id="from"
-                                type="text"
-                                placeholder="Departure station"
-                                value={from}
-                                onChange={(event) =>
-                                    setFrom(event.target.value)
-                                }
-                            />
+
+                            <label htmlFor="from">
+                                From
+                            </label>
+
+                            <div className="station-autocomplete">
+
+                                <input
+                                    id="from"
+                                    type="text"
+                                    placeholder="Enter station or city"
+                                    value={from}
+                                    onChange={handleFromChange}
+                                    autoComplete="off"
+                                />
+
+                                {fromSuggestions.length > 0 && (
+                                    <div className="station-suggestions">
+
+                                        {fromSuggestions.map((station) => (
+                                            <button
+                                                type="button"
+                                                key={station.id}
+                                                className="station-suggestion"
+                                                onClick={() =>
+                                                    selectFromStation(station)
+                                                }
+                                            >
+
+                                                <strong>
+                                                    {station.name}
+                                                </strong>
+
+                                                <span>
+                                                    {station.code} •{" "}
+                                                    {station.city}
+                                                </span>
+
+                                            </button>
+                                        ))}
+
+                                    </div>
+                                )}
+
+                            </div>
+
                         </div>
 
-                        <div className="home-search-swap-button">
+                        <button
+                            className="home-search-swap-button"
+                            type="button"
+                            onClick={() => {
+                                const currentFrom = from;
+                                const currentTo = to;
+
+                                const currentFromStation = fromStation;
+                                const currentToStation = toStation;
+
+                                setFrom(currentTo);
+                                setTo(currentFrom);
+
+                                setFromStation(currentToStation);
+                                setToStation(currentFromStation);
+
+                                setFromSuggestions([]);
+                                setToSuggestions([]);
+                            }}
+                        >
                             ⇄
-                        </div>
+                        </button>
 
                         <div className="home-search-input-group">
-                            <label htmlFor="to">To</label>
-                            <input
-                                id="to"
-                                type="text"
-                                placeholder="Arrival station"
-                                value={to}
-                                onChange={(event) =>
-                                    setTo(event.target.value)
-                                }
-                            />
+
+                            <label htmlFor="to">
+                                To
+                            </label>
+
+                            <div className="station-autocomplete">
+
+                                <input
+                                    id="to"
+                                    type="text"
+                                    placeholder="Enter station or city"
+                                    value={to}
+                                    onChange={handleToChange}
+                                    autoComplete="off"
+                                />
+
+                                {toSuggestions.length > 0 && (
+                                    <div className="station-suggestions">
+
+                                        {toSuggestions.map((station) => (
+                                            <button
+                                                type="button"
+                                                key={station.id}
+                                                className="station-suggestion"
+                                                onClick={() =>
+                                                    selectToStation(station)
+                                                }
+                                            >
+
+                                                <strong>
+                                                    {station.name}
+                                                </strong>
+
+                                                <span>
+                                                    {station.code} •{" "}
+                                                    {station.city}
+                                                </span>
+
+                                            </button>
+                                        ))}
+
+                                    </div>
+                                )}
+
+                            </div>
+
                         </div>
 
                         <div className="home-search-input-group">
@@ -104,6 +299,7 @@ function Home() {
                                 <option value="SL">Sleeper</option>
                             </select>
                         </div>
+
 
                         <button
                             className="home-search-button"

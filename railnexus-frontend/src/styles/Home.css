@@ -321,3 +321,65 @@
     padding-right: 20px;
   }
 }
+
+/* ========================================
+   STATION AUTOCOMPLETE
+   ======================================== */
+
+.station-autocomplete {
+    position: relative;
+    width: 100%;
+}
+
+.station-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.station-suggestion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    padding: 12px 14px;
+
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+
+    background: white;
+    color: #1f2937;
+
+    text-align: left;
+    cursor: pointer;
+
+    transition: background-color 0.15s ease;
+}
+
+.station-suggestion:last-child {
+    border-bottom: none;
+}
+
+.station-suggestion:hover {
+    background: #f8fafc;
+}
+
+.station-suggestion strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.station-suggestion span {
+    font-size: 12px;
+    color: #6b7280;
+}

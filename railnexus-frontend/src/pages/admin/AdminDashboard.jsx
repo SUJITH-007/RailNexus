@@ -1,7 +1,81 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/AdminDashboard.css";
 
 function AdminDashboard() {
+    const [dashboard, setDashboard] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchDashboard = async () => {
+            try {
+                const token = localStorage.getItem("token");
+
+                const response = await fetch(
+                    "http://localhost:8080/api/admin/dashboard",
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Failed to load dashboard data");
+                }
+
+                const data = await response.json();
+                setDashboard(data);
+            } catch (err) {
+                console.error("Dashboard error:", err);
+                setError("Unable to load dashboard data.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboard();
+    }, []);
+
+    const formatRevenue = (revenue) => {
+        if (revenue >= 100000) {
+            return `₹${(revenue / 100000).toFixed(2)}L`;
+        }
+
+        if (revenue >= 1000) {
+            return `₹${(revenue / 1000).toFixed(1)}K`;
+        }
+
+        return `₹${revenue.toFixed(0)}`;
+    };
+
+    if (loading) {
+        return (
+            <div className="admin-dashboard">
+                <div className="admin-dashboard-heading">
+                    <p>OVERVIEW</p>
+                    <h1>Dashboard</h1>
+                    <span>Loading dashboard data...</span>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="admin-dashboard">
+                <div className="admin-dashboard-heading">
+                    <p>OVERVIEW</p>
+                    <h1>Dashboard</h1>
+                    <span>{error}</span>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="admin-dashboard">
 
@@ -15,35 +89,33 @@ function AdminDashboard() {
                 </div>
             </div>
 
-
             <section className="admin-stat-grid">
 
                 <div className="admin-stat-card">
                     <span>TOTAL USERS</span>
-                    <strong>1,248</strong>
+                    <strong>{dashboard.totalUsers}</strong>
                     <p>Registered users</p>
                 </div>
 
                 <div className="admin-stat-card">
                     <span>TOTAL TRAINS</span>
-                    <strong>86</strong>
+                    <strong>{dashboard.totalTrains}</strong>
                     <p>Active trains</p>
                 </div>
 
                 <div className="admin-stat-card">
                     <span>TODAY'S BOOKINGS</span>
-                    <strong>342</strong>
+                    <strong>{dashboard.todayBookings}</strong>
                     <p>Bookings today</p>
                 </div>
 
                 <div className="admin-stat-card">
                     <span>TOTAL REVENUE</span>
-                    <strong>₹4.82L</strong>
+                    <strong>{formatRevenue(dashboard.totalRevenue)}</strong>
                     <p>Current revenue</p>
                 </div>
 
             </section>
-
 
             <section className="admin-dashboard-grid">
 
@@ -65,46 +137,35 @@ function AdminDashboard() {
                             <span>STATUS</span>
                         </div>
 
-                        <div className="admin-table-row">
-                            <span>RN102938</span>
-                            <span>12627</span>
-                            <span>Rahul Kumar</span>
-                            <strong className="status-confirmed">
-                                Confirmed
-                            </strong>
-                        </div>
+                        {dashboard.recentBookings.map((booking) => (
+                            <div
+                                className="admin-table-row"
+                                key={booking.id}
+                            >
+                                <span>{booking.pnr}</span>
 
-                        <div className="admin-table-row">
-                            <span>RN102939</span>
-                            <span>16515</span>
-                            <span>Ananya Rao</span>
-                            <strong className="status-confirmed">
-                                Confirmed
-                            </strong>
-                        </div>
+                                <span>{booking.trainNumber}</span>
 
-                        <div className="admin-table-row">
-                            <span>RN102940</span>
-                            <span>12051</span>
-                            <span>Vikram Shetty</span>
-                            <strong className="status-cancelled">
-                                Cancelled
-                            </strong>
-                        </div>
+                                <span>
+                                    {booking.passengerCount} Passenger
+                                    {booking.passengerCount !== 1 ? "s" : ""}
+                                </span>
 
-                        <div className="admin-table-row">
-                            <span>RN102941</span>
-                            <span>20646</span>
-                            <span>Priya Nair</span>
-                            <strong className="status-confirmed">
-                                Confirmed
-                            </strong>
-                        </div>
+                                <strong
+                                    className={
+                                        booking.status === "CONFIRMED"
+                                            ? "status-confirmed"
+                                            : "status-cancelled"
+                                    }
+                                >
+                                    {booking.status}
+                                </strong>
+                            </div>
+                        ))}
 
                     </div>
 
                 </div>
-
 
                 <div className="admin-dashboard-card">
 

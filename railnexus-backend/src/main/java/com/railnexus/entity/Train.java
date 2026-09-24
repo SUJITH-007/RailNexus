@@ -34,16 +34,15 @@ public class Train {
     @Column(nullable = false)
     private String destination;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TrainStatus status;
+
     @OneToMany(mappedBy = "train")
     private List<TrainRoute> routes;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
+    @OneToMany(mappedBy = "train")
+    private List<Coach> coaches;
 
     @ManyToMany
     @JoinTable(
@@ -52,4 +51,12 @@ public class Train {
             inverseJoinColumns = @JoinColumn(name = "class_id")
     )
     private List<TrainClass> classes;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

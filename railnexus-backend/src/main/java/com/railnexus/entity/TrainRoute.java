@@ -3,6 +3,7 @@ package com.railnexus.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -35,6 +36,9 @@ public class TrainRoute {
 
     @Column(name = "stop_order", nullable = false)
     private Integer stopOrder;
+
+    @Column(name = "journey_date", nullable = false)
+    private LocalDate journeyDate;
 
     @Column(name = "arrival_time")
     private LocalTime arrivalTime;

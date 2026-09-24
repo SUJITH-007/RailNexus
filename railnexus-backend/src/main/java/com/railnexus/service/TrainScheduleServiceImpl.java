@@ -26,7 +26,9 @@ public class TrainScheduleServiceImpl implements TrainScheduleService {
     }
 
     @Override
-    public TrainScheduleResponse createSchedule(TrainScheduleRequest request) {
+    public TrainScheduleResponse createSchedule(
+            TrainScheduleRequest request
+    ) {
 
         Train train = trainRepository.findById(request.trainId())
                 .orElseThrow(() ->
@@ -34,6 +36,15 @@ public class TrainScheduleServiceImpl implements TrainScheduleService {
                                 "Train not found with id: " + request.trainId()
                         )
                 );
+
+        if (trainScheduleRepository.existsByTrainIdAndDayOfWeek(
+                request.trainId(),
+                request.dayOfWeek()
+        )) {
+            throw new IllegalArgumentException(
+                    "Schedule already exists for this train and day"
+            );
+        }
 
         TrainSchedule schedule = TrainSchedule.builder()
                 .train(train)
@@ -47,7 +58,9 @@ public class TrainScheduleServiceImpl implements TrainScheduleService {
     }
 
     @Override
-    public List<TrainScheduleResponse> getSchedulesByTrain(Long trainId) {
+    public List<TrainScheduleResponse> getSchedulesByTrain(
+            Long trainId
+    ) {
 
         trainRepository.findById(trainId)
                 .orElseThrow(() ->
@@ -56,10 +69,67 @@ public class TrainScheduleServiceImpl implements TrainScheduleService {
                         )
                 );
 
-        return trainScheduleRepository.findByTrainId(trainId)
+        return trainScheduleRepository
+                .findByTrainIdOrderByDayOfWeek(trainId)
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
+    }
+
+    @Override
+    public TrainScheduleResponse updateSchedule(
+            Long scheduleId,
+            TrainScheduleRequest request
+    ) {
+
+        TrainSchedule schedule = trainScheduleRepository.findById(scheduleId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Schedule not found with id: " + scheduleId
+                        )
+                );
+
+        Train train = trainRepository.findById(request.trainId())
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Train not found with id: " + request.trainId()
+                        )
+                );
+
+        var existingSchedule =
+                trainScheduleRepository.findByTrainIdAndDayOfWeek(
+                        request.trainId(),
+                        request.dayOfWeek()
+                );
+
+        if (existingSchedule.isPresent()
+                && !existingSchedule.get().getId().equals(scheduleId)) {
+
+            throw new IllegalArgumentException(
+                    "Schedule already exists for this train and day"
+            );
+        }
+
+        schedule.setTrain(train);
+        schedule.setDayOfWeek(request.dayOfWeek());
+
+        TrainSchedule updatedSchedule =
+                trainScheduleRepository.save(schedule);
+
+        return mapToResponse(updatedSchedule);
+    }
+
+    @Override
+    public void deleteSchedule(Long scheduleId) {
+
+        TrainSchedule schedule = trainScheduleRepository.findById(scheduleId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Schedule not found with id: " + scheduleId
+                        )
+                );
+
+        trainScheduleRepository.delete(schedule);
     }
 
     private TrainScheduleResponse mapToResponse(

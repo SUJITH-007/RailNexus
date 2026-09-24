@@ -4,20 +4,18 @@ import { useAuth } from "../../context/AuthContext";
 import "../../styles/AdminLogin.css";
 
 function AdminLogin() {
-
     const navigate = useNavigate();
 
-    const { adminLogin } = useAuth();
+    const { login } = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const [showPassword, setShowPassword] = useState(false);
-
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    function handleSubmit(event) {
-
+    async function handleSubmit(event) {
         event.preventDefault();
 
         setError("");
@@ -30,26 +28,63 @@ function AdminLogin() {
             return;
         }
 
-        /*
-         * Temporary frontend-only admin login.
-         *
-         * This will be replaced by the Spring Boot
-         * authentication API later.
-         */
+        try {
+            setLoading(true);
 
-        if (
-            email === "admin@railnexus.com" &&
-            password === "Admin@123"
-        ) {
+            const response = await fetch(
+                "http://localhost:8080/api/auth/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: email.trim(),
+                        password: password,
+                    }),
+                }
+            );
 
-            adminLogin();
+            const data = await response.json();
+
+            if (!response.ok) {
+                setError(
+                    data.message ||
+                    "Invalid administrator credentials."
+                );
+                return;
+            }
+
+            /*
+             * Check the role contained in the JWT.
+             */
+            const payload = JSON.parse(
+                atob(data.token.split(".")[1])
+            );
+
+            if (payload.role !== "ADMIN") {
+                setError(
+                    "Access denied. Administrator account required."
+                );
+                return;
+            }
+
+            /*
+             * Store the JWT through AuthContext.
+             */
+            login(data);
 
             navigate("/admin");
 
-            return;
-        }
+        } catch (error) {
+            console.error("Admin login error:", error);
 
-        setError("Invalid administrator credentials.");
+            setError(
+                "Unable to connect to the server. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -77,7 +112,6 @@ function AdminLogin() {
 
                 </div>
 
-
                 <form
                     className="admin-login-form"
                     onSubmit={handleSubmit}
@@ -101,7 +135,6 @@ function AdminLogin() {
                         />
 
                     </div>
-
 
                     <div className="admin-login-input-group">
 
@@ -144,23 +177,23 @@ function AdminLogin() {
 
                     </div>
 
-
                     {error && (
                         <div className="admin-login-error">
                             {error}
                         </div>
                     )}
 
-
                     <button
                         type="submit"
                         className="admin-login-submit"
+                        disabled={loading}
                     >
-                        Administrator Login
+                        {loading
+                            ? "Signing in..."
+                            : "Administrator Login"}
                     </button>
 
                 </form>
-
 
                 <div className="admin-login-footer">
 

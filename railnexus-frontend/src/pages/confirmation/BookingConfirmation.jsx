@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../../styles/BookingConfirmation.css";
+import API_BASE_URL from "../../config/api";
 
 function BookingConfirmation() {
     const { pnr } = useParams();
@@ -11,7 +12,7 @@ function BookingConfirmation() {
         const fetchBooking = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:8080/api/bookings/${pnr}`,
+                    `${API_BASE_URL}/api/bookings/${pnr}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`

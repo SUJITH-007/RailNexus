@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import "../../styles/AdminTrains.css";
+import API_BASE_URL from "../../config/api";
 
 function AdminTrains() {
     const [search, setSearch] = useState("");
@@ -84,7 +85,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                "http://localhost:8080/api/trains",
+                `${API_BASE_URL}/api/trains`,
                 {
                     method: "GET",
                     headers: {
@@ -133,7 +134,7 @@ function AdminTrains() {
 
     try {
             const response = await fetch(
-                `http://localhost:8080/api/admin/train-routes/train/${train.id}`,
+                `${API_BASE_URL}/api/admin/train-routes/train/${train.id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -177,7 +178,7 @@ function AdminTrains() {
     async function fetchStations() {
         try {
             const response = await fetch(
-                "http://localhost:8080/api/stations",
+                `${API_BASE_URL}/api/stations`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -202,7 +203,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/admin/train-routes/train/${trainId}`,
+                `${API_BASE_URL}/api/admin/train-routes/train/${trainId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -259,7 +260,7 @@ function AdminTrains() {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/api/admin/coach-configurations/class/${value}`,
+                `${API_BASE_URL}/api/admin/coach-configurations/class/${value}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -319,7 +320,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/admin/coaches/train/${trainId}`,
+                `${API_BASE_URL}/api/admin/coaches/train/${trainId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -361,7 +362,7 @@ function AdminTrains() {
 
     async function fetchSeatRoutes(trainId) {
         const response = await fetch(
-            `http://localhost:8080/api/admin/train-routes/train/${trainId}`,
+            `${API_BASE_URL}/api/admin/train-routes/train/${trainId}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -383,7 +384,7 @@ function AdminTrains() {
         to
     ) {
         const response = await fetch(
-            `http://localhost:8080/api/admin/seats/coach/${coachId}/status?journeyDate=${encodeURIComponent(journeyDate)}&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`,
+            `${API_BASE_URL}/api/admin/seats/coach/${coachId}/status?journeyDate=${encodeURIComponent(journeyDate)}&from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -502,7 +503,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                "http://localhost:8080/api/admin/seat-blocks",
+                `${API_BASE_URL}/api/admin/seat-blocks`,
                 {
                     method: "POST",
                     headers: {
@@ -561,7 +562,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/admin/seat-blocks/${selectedSeat.blockId}`,
+                `${API_BASE_URL}/api/admin/seat-blocks/${selectedSeat.blockId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -602,7 +603,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/admin/seats/generate/coach/${selectedCoach.id}`,
+                `${API_BASE_URL}/api/admin/seats/generate/coach/${selectedCoach.id}`,
                 {
                     method: "POST",
                     headers: {
@@ -638,7 +639,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                "http://localhost:8080/api/admin/coaches",
+                `${API_BASE_URL}/api/admin/coaches`,
                 {
                     method: "POST",
                     headers: {
@@ -690,7 +691,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/admin/coaches/${coach.id}`,
+                `${API_BASE_URL}/api/admin/coaches/${coach.id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -758,8 +759,8 @@ function AdminTrains() {
             setError("");
 
             const url = editingRoute
-                ? `http://localhost:8080/api/admin/train-routes/${editingRoute.id}`
-                : "http://localhost:8080/api/admin/train-routes";
+                ? `${API_BASE_URL}/api/admin/train-routes/${editingRoute.id}`
+                : `${API_BASE_URL}/api/admin/train-routes`;
 
             const method = editingRoute ? "PUT" : "POST";
 
@@ -817,7 +818,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/admin/train-routes/${routeId}`,
+                `${API_BASE_URL}/api/admin/train-routes/${routeId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -876,8 +877,8 @@ function AdminTrains() {
             setSaving(true);
 
             const url = editingTrain
-                ? `http://localhost:8080/api/trains/${editingTrain.number}`
-                : "http://localhost:8080/api/trains";
+                ? `${API_BASE_URL}/api/trains/${editingTrain.number}`
+                : `${API_BASE_URL}/api/trains`;
 
             const method = editingTrain ? "PUT" : "POST";
 
@@ -902,7 +903,7 @@ function AdminTrains() {
 
             if (editingTrain) {
                 const dateResponse = await fetch(
-                    `http://localhost:8080/api/admin/train-routes/train/${editingTrain.id}/journey-date?journeyDate=${encodeURIComponent(trainJourneyDate)}`,
+                    `${API_BASE_URL}/api/admin/train-routes/train/${editingTrain.id}/journey-date?journeyDate=${encodeURIComponent(trainJourneyDate)}`,
                     {
                         method: "PUT",
                         headers: {
@@ -949,7 +950,7 @@ function AdminTrains() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/trains/${deletingTrain.number}`,
+                `${API_BASE_URL}/api/trains/${deletingTrain.number}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -2218,7 +2219,7 @@ function AdminTrains() {
                                     setError("");
 
                                     const response = await fetch(
-                                        `http://localhost:8080/api/admin/coaches/${editingCoach.id}`,
+                                        `${API_BASE_URL}/api/admin/coaches/${editingCoach.id}`,
                                         {
                                             method: "PUT",
                                             headers: {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useSearchParams, Link, useNavigate } from "react-router-dom";
 import "../../styles/Booking.css";
+import API_BASE_URL from "../../config/api";
 
 function Booking() {
     const { trainNumber } = useParams();
@@ -37,7 +38,7 @@ function Booking() {
                 const token = localStorage.getItem("token");
 
                 const response = await fetch(
-                    `http://localhost:8080/api/train-routes/train/${trainId}?journeyDate=${journeyDate}`,
+                    `${API_BASE_URL}/api/train-routes/train/${trainId}?journeyDate=${journeyDate}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
@@ -127,7 +128,7 @@ function Booking() {
             };
 
             const response = await fetch(
-                "http://localhost:8080/api/bookings/lock",
+                `${API_BASE_URL}/api/bookings/lock`,
                 {
                     method: "POST",
                     headers: {
@@ -167,7 +168,7 @@ function Booking() {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                `http://localhost:8080/api/bookings/${lockedBooking.pnr}/cancel`,
+                `${API_BASE_URL}/api/bookings/${lockedBooking.pnr}/cancel`,
                 {
                     method: "PUT",
                     headers: {

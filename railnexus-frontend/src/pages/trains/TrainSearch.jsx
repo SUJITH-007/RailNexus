@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/TrainSearch.css";
+import API_BASE_URL from "../../config/api";
 
 function TrainSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -86,7 +87,7 @@ function TrainSearch() {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/api/stations/search?query=${encodeURIComponent(
+                `${API_BASE_URL}/api/stations/search?query=${encodeURIComponent(
                     query.trim()
                 )}`,
                 {
@@ -203,7 +204,7 @@ function TrainSearch() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/train-routes/search?fromStationId=${fromStation.id}&toStationId=${toStation.id}&journeyDate=${journeyDate}`,
+                `${API_BASE_URL}/api/train-routes/search?fromStationId=${fromStation.id}&toStationId=${toStation.id}&journeyDate=${journeyDate}`,
                 {
                     method: "GET",
                     headers: {
@@ -257,7 +258,7 @@ function TrainSearch() {
             for (const train of trains) {
                 try {
                     const response = await fetch(
-                        `http://localhost:8080/api/bookings/class-availability?trainId=${train.trainId}&journeyDate=${journeyDate}&from=${fromStation.code}&to=${toStation.code}`,
+                        `${API_BASE_URL}/api/bookings/class-availability?trainId=${train.trainId}&journeyDate=${journeyDate}&from=${fromStation.code}&to=${toStation.code}`,
                         {
                             method: "GET",
                             headers: {

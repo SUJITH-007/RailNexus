@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/Login.css";
+import API_BASE_URL from "../../config/api";
 
 function Login() {
     const navigate = useNavigate();
@@ -27,8 +28,9 @@ function Login() {
         try {
             setLoading(true);
 
+            // "http://localhost:8080/api/auth/login"
             const response = await fetch(
-                "http://localhost:8080/api/auth/login",
+                `${API_BASE_URL}/api/auth/login`, 
                 {
                     method: "POST",
                     headers: {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "../../styles/Home.css";
+import API_BASE_URL from "../../config/api";
 
 function Home() {
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ function Home() {
 
         try {
             const response = await fetch(
-                `http://localhost:8080/api/stations/search?query=${encodeURIComponent(
+                `${API_BASE_URL}/api/stations/search?query=${encodeURIComponent(
                     query.trim()
                 )}`,
                 {

@@ -6,6 +6,7 @@ import {
     useNavigate
 } from "react-router-dom";
 import "../../styles/Payment.css";
+import API_BASE_URL from "../../config/api";
 
 function Payment() {
     const { trainNumber } = useParams();
@@ -39,7 +40,7 @@ function Payment() {
             const token = localStorage.getItem("token");
 
             const orderResponse = await fetch(
-                `http://localhost:8080/api/bookings/payment-order/${booking.pnr}`,
+                `${API_BASE_URL}/api/bookings/payment-order/${booking.pnr}`,
                 {
                     method: "POST",
                     headers: {
@@ -66,7 +67,7 @@ function Payment() {
                 order_id: order.orderId,
                 handler: async function (response) {
                     const verifyResponse = await fetch(
-                        "http://localhost:8080/api/bookings/payment/verify",
+                        `${API_BASE_URL}/api/bookings/payment/verify`,
                         {
                             method: "POST",
                             headers: {

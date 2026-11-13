@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/AdminUsers.css";
+import API_BASE_URL from "../../config/api";
 
 function AdminUsers() {
     const [search, setSearch] = useState("");
@@ -22,7 +23,7 @@ function AdminUsers() {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                "http://localhost:8080/api/admin/users",
+                `${API_BASE_URL}/api/admin/users`,
                 {
                     method: "GET",
                     headers: {
@@ -63,7 +64,7 @@ function AdminUsers() {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                `http://localhost:8080/api/admin/users/${user.id}/status?status=${nextStatus}`,
+                `${API_BASE_URL}/api/admin/users/${user.id}/status?status=${nextStatus}`,
                 {
                     method: "PUT",
                     headers: {

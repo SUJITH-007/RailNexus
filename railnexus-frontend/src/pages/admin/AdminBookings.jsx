@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/AdminBookings.css";
+import API_BASE_URL from "../../config/api";
 
 function AdminBookings() {
     const [search, setSearch] = useState("");
@@ -21,7 +22,7 @@ function AdminBookings() {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                "http://localhost:8080/api/admin/bookings",
+                `${API_BASE_URL}/api/admin/bookings`,
                 {
                     method: "GET",
                     headers: {

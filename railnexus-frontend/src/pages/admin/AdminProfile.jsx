@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/AdminProfile.css";
+import API_BASE_URL from "../../config/api";
 
 function AdminProfile() {
     const [isEditing, setIsEditing] = useState(false);
@@ -29,7 +30,7 @@ function AdminProfile() {
             setError("");
 
             const response = await fetch(
-                "http://localhost:8080/api/users/me",
+                `${API_BASE_URL}/api/users/me`,
                 {
                     method: "GET",
                     headers: {
@@ -120,7 +121,7 @@ function AdminProfile() {
             setSaving(true);
 
             const response = await fetch(
-                "http://localhost:8080/api/users/me",
+                `${API_BASE_URL}/api/users/me`,
                 {
                     method: "PUT",
                     headers: {
@@ -147,7 +148,7 @@ function AdminProfile() {
             localStorage.setItem("token", data.token);
 
             const profileResponse = await fetch(
-                "http://localhost:8080/api/users/me",
+                `${API_BASE_URL}/api/users/me`,
                 {
                     method: "GET",
                     headers: {

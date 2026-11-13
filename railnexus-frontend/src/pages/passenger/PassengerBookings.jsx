@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/PassengerBookings.css";
+import API_BASE_URL from "../../config/api";
 
 function PassengerBookings() {
 
@@ -11,7 +12,7 @@ function PassengerBookings() {
         const fetchBookings = async () => {
             try {
                 const response = await fetch(
-                    "http://localhost:8080/api/bookings/my-bookings",
+                    `${API_BASE_URL}/api/bookings/my-bookings`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`

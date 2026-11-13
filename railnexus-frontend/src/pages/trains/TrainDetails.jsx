@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
 import "../../styles/TrainDetails.css";
+import API_BASE_URL from "../../config/api";
 
 function TrainDetails() {
     const { trainNumber } = useParams();
@@ -18,7 +19,7 @@ function TrainDetails() {
         const fetchTrainDetails = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:8080/api/train-routes/train/${trainId}?journeyDate=${journeyDate}`,
+                    `${API_BASE_URL}/api/train-routes/train/${trainId}?journeyDate=${journeyDate}`,
                     {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem("token")}`

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/AdminDashboard.css";
+import API_BASE_URL from "../../config/api";
 
 function AdminDashboard() {
     const [dashboard, setDashboard] = useState(null);
@@ -13,7 +14,7 @@ function AdminDashboard() {
                 const token = localStorage.getItem("token");
 
                 const response = await fetch(
-                    "http://localhost:8080/api/admin/dashboard",
+                    `${API_BASE_URL}/api/admin/dashboard`,
                     {
                         method: "GET",
                         headers: {

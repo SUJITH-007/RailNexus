@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/AdminStations.css";
+import API_BASE_URL from "../../config/api";
 
 function AdminStations() {
     const [stations, setStations] = useState([]);
@@ -32,7 +33,7 @@ function AdminStations() {
             setError("");
 
             const response = await fetch(
-                "http://localhost:8080/api/stations",
+                `${API_BASE_URL}/api/stations`,
                 {
                     method: "GET",
                     headers: {
@@ -113,7 +114,7 @@ function AdminStations() {
             setSaving(true);
 
             const response = await fetch(
-                "http://localhost:8080/api/stations",
+                `${API_BASE_URL}/api/stations`,
                 {
                     method: "POST",
                     headers: {
@@ -173,7 +174,7 @@ function AdminStations() {
             setSaving(true);
 
             const response = await fetch(
-                `http://localhost:8080/api/stations/${editingCode}`,
+                `${API_BASE_URL}/api/stations/${editingCode}`,
                 {
                     method: "PUT",
                     headers: {
@@ -222,7 +223,7 @@ function AdminStations() {
             setError("");
 
             const response = await fetch(
-                `http://localhost:8080/api/stations/${station.code}`,
+                `${API_BASE_URL}/api/stations/${station.code}`,
                 {
                     method: "DELETE",
                     headers: {
